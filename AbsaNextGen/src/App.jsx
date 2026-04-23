@@ -1,11 +1,9 @@
-
-
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { UserProvider, useUser } from './context/UserContext';
 import './styles/global.css';
 import Onboarding from './pages/Onboarding';
 import Sidebar from './components/Sidebar';
-
+import Dashboard from './pages/Dashboard';
 
 
 const Placeholder = ({ name }) => (
@@ -42,8 +40,8 @@ function AppRoutes() {
           {/* Default route goes to dashboard */}
           <Route path="/" element={<Navigate to="/dashboard" replace />} />
 
-          {/* Swap Placeholder with real import as we build each page */}
-          <Route path="/dashboard" element={<Placeholder name="Dashboard" />} />
+          {/* Main pages */}
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/strategy-tracks" element={<Placeholder name="Strategy Tracks" />} />
           <Route path="/simulation-lab" element={<Placeholder name="Simulation Lab" />} />
           <Route path="/simulation-lab/lifestyle-studio" element={<Placeholder name="Lifestyle Studio" />} />
