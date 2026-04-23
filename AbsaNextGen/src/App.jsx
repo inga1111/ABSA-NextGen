@@ -5,6 +5,10 @@ import Onboarding from './pages/Onboarding';
 import Sidebar from './components/Sidebar';
 import Dashboard from './pages/Dashboard';
 import StrategyTracks from './pages/StrategyTracks';
+import SimulationLab from './pages/SimulationLab';
+import LifestyleStudio from './pages/LifestyleStudio';
+import LifePathStudio from './pages/LifePathStudio';
+import FutureWealthStudio from './pages/FutureWealthStudio';
 
 
 const Placeholder = ({ name }) => (
@@ -44,10 +48,10 @@ function AppRoutes() {
           {/* Main pages */}
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/strategy-tracks" element={<StrategyTracks />} />
-          <Route path="/simulation-lab" element={<Placeholder name="Simulation Lab" />} />
-          <Route path="/simulation-lab/lifestyle-studio" element={<Placeholder name="Lifestyle Studio" />} />
-          <Route path="/simulation-lab/life-path-studio" element={<Placeholder name="Life Path Studio" />} />
-          <Route path="/simulation-lab/future-wealth-studio" element={<Placeholder name="Future Wealth Studio" />} />
+          <Route path="/simulation-lab" element={<SimulationLab />} />
+          <Route path="/simulation-lab/lifestyle-studio" element={<LifestyleStudio />} />
+          <Route path="/simulation-lab/life-path-studio" element={<LifePathStudio />} />
+          <Route path="/simulation-lab/future-wealth-studio" element={<FutureWealthStudio />} />
           <Route path="/banking-wrapped" element={<Placeholder name="Banking Wrapped" />} />
           <Route path="/chatbot" element={<Placeholder name="ChatBot" />} />
           <Route path="/profile" element={<Placeholder name="Profile" />} />

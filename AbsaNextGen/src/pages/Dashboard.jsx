@@ -103,7 +103,7 @@ function Dashboard() {
       <div className="dashboard-header">
         <div>
           <h1>
-            Good day, <span className="text-orange">{firstName || 'there'}</span> 👋
+            Hello, <span className="text-orange">{firstName || 'there'}</span> 
           </h1>
           <p>Here is your financial snapshot for this month.</p>
         </div>
