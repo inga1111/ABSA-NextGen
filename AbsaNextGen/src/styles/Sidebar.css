@@ -1,13 +1,10 @@
-/* ============================================
-   SIDEBAR STYLES
-   File location: src/styles/Sidebar.css
-   ============================================ */
 
-/* ---------- SIDEBAR WRAPPER ---------- */
 .sidebar {
   width: var(--sidebar-width);
   min-height: 100vh;
-  background: var(--bg-sidebar);
+  background: rgba(10, 10, 31, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border-right: 1px solid var(--border-color);
   display: flex;
   flex-direction: column;
@@ -150,9 +147,15 @@
 }
 
 .sidebar-nav-item.active {
-  background: rgba(232, 73, 15, 0.12);
+  background: linear-gradient(
+    90deg,
+    rgba(232,73,15,0.15),
+    transparent
+  );
   color: var(--absa-orange);
   font-weight: 600;
+
+  box-shadow: var(--glow-orange);
 }
 
 .sidebar-nav-icon {
