@@ -1,22 +1,16 @@
-/* ============================================
-   ABSA NEXTGEN WEALTH STUDIO — GLOBAL CSS
-   File location: src/styles/global.css
-   ============================================ */
-
-/* ---------- GOOGLE FONTS IMPORT ---------- */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 /* ---------- CSS VARIABLES (Your colour palette) ---------- */
 :root {
   /* Brand Colours */
-  --absa-red: #CC0000;
-  --absa-orange: #E8490F;
+  --absa-red: #aa0707;
+  --absa-orange: #c63a07;
 
   /* Background Colours - dark theme from wireframes */
   --bg-primary: #0D0D1A;
   --bg-secondary: #13132B;
   --bg-card: #1A1A35;
-  --bg-card-hover: #21214A;
+  --bg-card-hover: #191950;
   --bg-sidebar: #0A0A1F;
 
   /* Text Colours */
@@ -26,18 +20,18 @@
   --text-dark: #0D0D1A;
 
   /* Status Colours (financial health) */
-  --status-green: #2ECC71;
+  --status-green: #05b442;
   --status-green-bg: rgba(46, 204, 113, 0.15);
   --status-yellow: #F4D03F;
   --status-yellow-bg: rgba(244, 208, 63, 0.15);
-  --status-red: #E74C3C;
+  --status-red: #cf2b19;
   --status-red-bg: rgba(231, 76, 60, 0.15);
 
   /* Accent / Highlight Colours */
-  --accent-teal: #00C9B1;
-  --accent-blue: #3B82F6;
-  --accent-purple: #8B5CF6;
-  --accent-pink: #EC4899;
+  --accent-teal: #04ad91;
+  --accent-blue: #186ef7;
+  --accent-purple: #8e6ddc;
+  --accent-pink: #fb3497;
 
   /* Gradient */
   --gradient-primary: linear-gradient(135deg, #E8490F, #CC0000);
