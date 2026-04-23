@@ -5,13 +5,13 @@ import '../styles/Dashboard.css';
 
 
 const PIE_COLORS = [
-  '#E8490F', // orange - rent
-  '#3B82F6', // blue - car
-  '#2ECC71', // green - savings
-  '#F4D03F', // yellow - lifestyle
-  '#8B5CF6', // purple - debt
-  '#00C9B1', // teal - investments
-  '#EC4899', // pink - other
+  '#b00000', // orange - rent
+  '#0046e8', // blue - car
+  '#008a17', // green - savings
+  '#fad000', // yellow - lifestyle
+  '#ac00ca', // purple - debt
+  '#ff6a00', // teal - investments
+  '#ff349a', // pink - other
 ];
 
 function Dashboard() {
@@ -45,10 +45,7 @@ function Dashboard() {
     otherFixed,
   } = userData;
 
-  // -----------------------------------------------
-  // Build pie chart data from user's expenses
-  // Only include categories that have a value > 0
-  // -----------------------------------------------
+ 
   const pieData = [
     { name: 'Rent / Bond', value: Number(rent) || 0 },
     { name: 'Car Payment', value: Number(carPayment) || 0 },
@@ -76,10 +73,10 @@ function Dashboard() {
   // Health status colour mapping
   // -----------------------------------------------
   const healthColour = {
-    green: '#2ECC71',
+    green: '#2ecc58',
     yellow: '#F4D03F',
-    red: '#E74C3C',
-  }[healthStatus] || '#E74C3C';
+    red: '#d61a05',
+  }[healthStatus] || '#d34434';
 
   // -----------------------------------------------
   // Custom tooltip for the pie chart
