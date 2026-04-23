@@ -5,9 +5,9 @@ import '../styles/Onboarding.css';
 
 const STEPS = [
   'Personal Info',a
-  'Income & Expenses',
-  'Lifestyle & Debt',
-  'Savings & Goals',
+  'Income and Expenses',
+  'Lifestyle and Debt',
+  'Savings and Goals',
 ];
 
 function Onboarding() {
