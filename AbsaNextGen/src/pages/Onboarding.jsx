@@ -5,7 +5,7 @@ import '../styles/Onboarding.css';
 
 const STEPS = [
     'Personal Info'
-    'Income and Expensees'
+    'Income and Expenses'
     'Lifestyle and Debt'
     'Savings and Goals'
 ];
