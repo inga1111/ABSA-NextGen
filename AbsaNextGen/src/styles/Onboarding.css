@@ -1,0 +1,424 @@
+/* ---------- MAIN WRAPPER ---------- */
+.onboarding-wrapper {
+  display: flex;
+  min-height: 100vh;
+  background: var(--bg-primary);
+}
+
+/* ---------- LEFT PANEL — Branding ---------- */
+.onboarding-left {
+  width: 380px;
+  min-width: 380px;
+  background: linear-gradient(160deg, #0A0A1F 0%, #1a1a35 60%, #0f1a2e 100%);
+  border-right: 1px solid var(--border-color);
+  padding: 60px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+}
+
+/* decorative background circle */
+.onboarding-left::before {
+  content: '';
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(232, 73, 15, 0.15), transparent 70%);
+  top: -80px;
+  right: -80px;
+  pointer-events: none;
+}
+
+.onboarding-left::after {
+  content: '';
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 201, 177, 0.1), transparent 70%);
+  bottom: 80px;
+  left: -60px;
+  pointer-events: none;
+}
+
+/* ABSA Logo */
+.onboarding-logo {
+  display: inline-block;
+  background: var(--gradient-primary);
+  color: white;
+  font-size: 1rem;
+  font-weight: 800;
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  margin-bottom: var(--spacing-lg);
+  letter-spacing: 0.05em;
+  text-transform: lowercase;
+}
+
+.onboarding-brand h1 {
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.15;
+  margin-bottom: var(--spacing-md);
+}
+
+.onboarding-brand p {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+/* Quote block */
+.onboarding-quote {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-left: 3px solid var(--absa-orange);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-lg);
+  position: relative;
+  z-index: 1;
+}
+
+.quote-mark {
+  font-size: 3rem;
+  color: var(--absa-orange);
+  line-height: 1;
+  display: block;
+  margin-bottom: -10px;
+  font-family: Georgia, serif;
+}
+
+.onboarding-quote p {
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  font-style: italic;
+  margin: var(--spacing-sm) 0;
+}
+
+.quote-author {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+/* Tagline */
+.onboarding-tagline {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  position: relative;
+  z-index: 1;
+}
+
+.onboarding-tagline strong {
+  color: var(--absa-orange);
+}
+
+/* ---------- RIGHT PANEL — Form ---------- */
+.onboarding-right {
+  flex: 1;
+  padding: 60px 60px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---------- PROGRESS BAR ---------- */
+.onboarding-progress {
+  margin-bottom: var(--spacing-xxl);
+}
+
+.progress-labels {
+  display: flex;
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-sm);
+  flex-wrap: wrap;
+}
+
+.progress-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  transition: color var(--transition-normal);
+}
+
+.progress-label.active {
+  color: var(--absa-orange);
+}
+
+.progress-label.done {
+  color: var(--status-green);
+}
+
+.progress-bar {
+  height: 4px;
+  background: var(--border-color);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  margin-bottom: var(--spacing-xs);
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--gradient-primary);
+  border-radius: var(--radius-full);
+  transition: width 0.4s ease;
+}
+
+.progress-text {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* ---------- FORM STEPS ---------- */
+.onboarding-form {
+  flex: 1;
+}
+
+.form-step h2 {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-xs);
+}
+
+.form-step > p {
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-xl);
+}
+
+.form-section-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent-teal);
+  margin-bottom: var(--spacing-md);
+  margin-top: var(--spacing-xl);
+  padding-bottom: var(--spacing-xs);
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* ---------- FORM GRID ---------- */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-md);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group.full-width {
+  grid-column: 1 / -1;
+}
+
+.form-group label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.form-group input {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  transition: border-color var(--transition-fast);
+  width: 100%;
+}
+
+.form-group input:focus {
+  border-color: var(--absa-orange);
+  background: var(--bg-card-hover);
+}
+
+.form-group input::placeholder {
+  color: var(--text-muted);
+}
+
+/* R prefix on currency inputs */
+.input-prefix-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-prefix {
+  position: absolute;
+  left: 14px;
+  color: var(--accent-teal);
+  font-weight: 700;
+  font-size: 0.9rem;
+  pointer-events: none;
+}
+
+.input-prefix-wrapper input {
+  padding-left: 30px;
+}
+
+/* ---------- GOAL CARDS (Step 4) ---------- */
+.goal-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-md);
+}
+
+.goal-card {
+  background: var(--bg-card);
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  text-align: center;
+}
+
+.goal-card:hover {
+  border-color: var(--absa-orange);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.goal-card.selected {
+  border-color: var(--absa-orange);
+  background: rgba(232, 73, 15, 0.1);
+  box-shadow: var(--shadow-glow-orange);
+}
+
+.goal-icon {
+  font-size: 2rem;
+  margin-bottom: var(--spacing-sm);
+}
+
+.goal-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-xs);
+}
+
+.goal-desc {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* ---------- NAVIGATION BUTTONS ---------- */
+.form-nav {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-xxl);
+  padding-top: var(--spacing-lg);
+  border-top: 1px solid var(--border-color);
+}
+
+.btn-back {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+  padding: 12px 28px;
+  border-radius: var(--radius-full);
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all var(--transition-normal);
+}
+
+.btn-back:hover {
+  color: var(--text-primary);
+  border-color: var(--text-secondary);
+}
+
+.btn-next {
+  background: var(--gradient-primary);
+  color: white;
+  padding: 12px 36px;
+  border-radius: var(--radius-full);
+  font-weight: 600;
+  font-size: 0.95rem;
+  border: none;
+  transition: all var(--transition-normal);
+}
+
+.btn-next:hover {
+  box-shadow: var(--shadow-glow-orange);
+  transform: translateY(-1px);
+}
+
+.btn-submit {
+  background: var(--gradient-primary);
+  color: white;
+  padding: 14px 40px;
+  border-radius: var(--radius-full);
+  font-weight: 700;
+  font-size: 1rem;
+  border: none;
+  transition: all var(--transition-normal);
+}
+
+.btn-submit:hover:not(:disabled) {
+  box-shadow: var(--shadow-glow-orange);
+  transform: translateY(-1px);
+}
+
+.btn-submit:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 1024px) {
+  .onboarding-left {
+    width: 300px;
+    min-width: 300px;
+    padding: 40px 30px;
+  }
+
+  .onboarding-right {
+    padding: 40px 40px;
+  }
+
+  .goal-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .onboarding-wrapper {
+    flex-direction: column;
+  }
+
+  .onboarding-left {
+    width: 100%;
+    min-width: unset;
+    padding: 40px 30px;
+    min-height: unset;
+  }
+
+  .onboarding-right {
+    padding: 30px 24px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .goal-cards {
+    grid-template-columns: 1fr;
+  }
+}

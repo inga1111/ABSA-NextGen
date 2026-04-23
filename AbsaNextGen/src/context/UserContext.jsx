@@ -1,21 +1,9 @@
-// ============================================
-// ABSA NEXTGEN WEALTH STUDIO — USERCONTEXT.JSX
-// File location: src/context/UserContext.jsx
-// ============================================
 
 import { createContext, useContext, useState } from 'react';
 
-// -----------------------------------------------
-// Create the context
-// This is what other files will import to read
-// or update the user's financial data
-// -----------------------------------------------
 const UserContext = createContext(null);
 
-// -----------------------------------------------
-// SOUTH AFRICAN TAX LOGIC (2024/2025 tax year)
-// Uses SARS progressive tax brackets to estimate
-// monthly take-home pay from gross monthly salary
+
 // -----------------------------------------------
 export function calculateSATax(grossMonthly) {
   const grossAnnual = grossMonthly * 12;
@@ -327,10 +315,6 @@ export function UserProvider({ children }) {
   );
 }
 
-// -----------------------------------------------
-// Custom hook — import this in any page like:
-// const { userData, formatCurrency } = useUser();
-// -----------------------------------------------
 export function useUser() {
   const context = useContext(UserContext);
   if (!context) {
