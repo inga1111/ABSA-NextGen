@@ -3,9 +3,8 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { UserProvider, useUser } from './context/UserContext';
 import './styles/global.css';
-
-
 import Onboarding from './pages/Onboarding';
+import Sidebar from './components/Sidebar';
 
 
 
@@ -35,22 +34,7 @@ function AppRoutes() {
 
       {/* Sidebar — swap this placeholder when we build Sidebar.jsx */}
       {/* <Sidebar /> */}
-      <div style={{
-        width: '220px',
-        minHeight: '100vh',
-        background: '#0A0A1F',
-        borderRight: '1px solid rgba(255,255,255,0.08)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        color: 'rgba(255,255,255,0.3)',
-        fontSize: '0.8rem',
-        position: 'fixed',
-        left: 0,
-        top: 0
-      }}>
-        Sidebar coming soon
-      </div>
+      <Sidebar />
 
       {/* All pages render here */}
       <div className="main-content">

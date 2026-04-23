@@ -1,0 +1,228 @@
+/* ============================================
+   SIDEBAR STYLES
+   File location: src/styles/Sidebar.css
+   ============================================ */
+
+/* ---------- SIDEBAR WRAPPER ---------- */
+.sidebar {
+  width: var(--sidebar-width);
+  min-height: 100vh;
+  background: var(--bg-sidebar);
+  border-right: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 100;
+  padding: var(--spacing-lg) 0;
+  overflow-y: auto;
+}
+
+/* ---------- LOGO ---------- */
+.sidebar-logo {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: 0 var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+}
+
+.sidebar-logo-badge {
+  background: var(--gradient-primary);
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  letter-spacing: 0.05em;
+  text-transform: lowercase;
+  flex-shrink: 0;
+}
+
+.sidebar-logo-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.sidebar-logo-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.sidebar-logo-sub {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+/* ---------- USER GREETING ---------- */
+.sidebar-user {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  margin-bottom: var(--spacing-sm);
+}
+
+.sidebar-user-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--gradient-primary);
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.sidebar-user-info {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.sidebar-user-name {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sidebar-user-occupation {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ---------- DIVIDER ---------- */
+.sidebar-divider {
+  height: 1px;
+  background: var(--border-color);
+  margin: var(--spacing-sm) var(--spacing-lg);
+}
+
+/* ---------- NAVIGATION ---------- */
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 0 var(--spacing-sm);
+  flex: 1;
+}
+
+.sidebar-nav > .sidebar-nav-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  padding: var(--spacing-sm) var(--spacing-sm);
+  margin-bottom: 2px;
+}
+
+.sidebar-nav-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: 10px var(--spacing-sm);
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: all var(--transition-fast);
+  text-decoration: none;
+  position: relative;
+  cursor: pointer;
+}
+
+.sidebar-nav-item:hover {
+  background: var(--bg-card);
+  color: var(--text-primary);
+}
+
+.sidebar-nav-item.active {
+  background: rgba(232, 73, 15, 0.12);
+  color: var(--absa-orange);
+  font-weight: 600;
+}
+
+.sidebar-nav-icon {
+  font-size: 1rem;
+  width: 20px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.sidebar-nav-label-text {
+  flex: 1;
+}
+
+/* Active indicator dot on the right */
+.sidebar-nav-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--absa-orange);
+  flex-shrink: 0;
+}
+
+/* ---------- BOTTOM CHATBOT BUTTON ---------- */
+.sidebar-bottom {
+  padding: 0;
+  margin-top: auto;
+}
+
+.sidebar-chatbot-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  text-decoration: none;
+}
+
+.sidebar-chatbot-btn:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--accent-teal);
+  box-shadow: var(--shadow-glow-teal);
+}
+
+.sidebar-chatbot-btn.active {
+  background: rgba(0, 201, 177, 0.1);
+  border-color: var(--accent-teal);
+}
+
+.sidebar-chatbot-icon {
+  font-size: 1.4rem;
+  flex-shrink: 0;
+}
+
+.sidebar-chatbot-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-chatbot-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.sidebar-chatbot-sub {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
