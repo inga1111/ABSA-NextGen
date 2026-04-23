@@ -72,7 +72,7 @@ function Onboarding() {
       {/* Left panel — branding */}
       <div className="onboarding-left">
         <div className="onboarding-brand">
-          <div className="onboarding-logo">absa</div>
+          <div className="onboarding-logo">ABSA</div>
           <h1>NextGen<br />Wealth Studio</h1>
           <p>Your first five years of financial independence, guided by ABSA.</p>
         </div>
