@@ -4,6 +4,7 @@ import './styles/global.css';
 import Onboarding from './pages/Onboarding';
 import Sidebar from './components/Sidebar';
 import Dashboard from './pages/Dashboard';
+import StrategyTracks from './pages/StrategyTracks';
 
 
 const Placeholder = ({ name }) => (
@@ -42,7 +43,7 @@ function AppRoutes() {
 
           {/* Main pages */}
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/strategy-tracks" element={<Placeholder name="Strategy Tracks" />} />
+          <Route path="/strategy-tracks" element={<StrategyTracks />} />
           <Route path="/simulation-lab" element={<Placeholder name="Simulation Lab" />} />
           <Route path="/simulation-lab/lifestyle-studio" element={<Placeholder name="Lifestyle Studio" />} />
           <Route path="/simulation-lab/life-path-studio" element={<Placeholder name="Life Path Studio" />} />
