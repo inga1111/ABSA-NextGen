@@ -1,10 +1,29 @@
-/* ---------- WRAPPER ---------- */
+/* ============================================
+   STRATEGY TRACKS STYLES — UI POLISH
+   File location: src/styles/StrategyTracks.css
+   ============================================ */
+
 .tracks-wrapper {
   max-width: 1100px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   gap: var(--spacing-xl);
+  position: relative;
+}
+
+/* Ambient background glow */
+.tracks-wrapper::before {
+  content: '';
+  position: fixed;
+  top: 20%;
+  left: 30%;
+  width: 500px;
+  height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(204, 0, 0, 0.07) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
 }
 
 /* ---------- TRACK SELECTOR CARDS ---------- */
@@ -12,49 +31,57 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: var(--spacing-md);
+  position: relative;
+  z-index: 1;
 }
 
 .track-selector-card {
-  background: var(--bg-card);
-  border: 2px solid var(--border-color);
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 2px solid var(--glass-border);
   border-radius: var(--radius-lg);
   padding: var(--spacing-lg);
   cursor: pointer;
   transition: all var(--transition-normal);
   position: relative;
   text-align: center;
+  overflow: hidden;
 }
+
+/* Bottom glow per card using track colour */
+.track-selector-card::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 15%;
+  right: 15%;
+  height: 60px;
+  background: radial-gradient(ellipse, var(--track-colour) 0%, transparent 70%);
+  opacity: 0.2;
+  filter: blur(14px);
+  pointer-events: none;
+  transition: opacity var(--transition-normal);
+}
+
+.track-selector-card:hover::after { opacity: 0.4; }
 
 .track-selector-card:hover {
   border-color: var(--track-colour);
-  transform: translateY(-3px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
 }
 
 .track-selector-card.active {
   border-color: var(--track-colour);
-  background: rgba(255, 255, 255, 0.04);
-  box-shadow: 0 0 0 1px var(--track-colour),
-              0 8px 24px rgba(0, 0, 0, 0.3);
+  background: rgba(255, 255, 255, 0.06);
 }
 
-.track-selector-icon {
-  font-size: 2rem;
-  margin-bottom: var(--spacing-sm);
-}
+.track-selector-card.active::after { opacity: 0.5; }
 
-.track-selector-title {
-  font-size: 0.9rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  margin-bottom: var(--spacing-xs);
-}
-
-.track-selector-tagline {
-  font-size: 0.78rem;
-  color: var(--text-secondary);
-  line-height: 1.5;
-}
+.track-selector-icon { font-size: 2rem; margin-bottom: var(--spacing-sm); }
+.track-selector-title { font-size: 0.9rem; font-weight: 700; color: var(--text-primary); margin-bottom: var(--spacing-xs); }
+.track-selector-tagline { font-size: 0.78rem; color: var(--text-secondary); line-height: 1.5; }
 
 .track-selector-badge {
   position: absolute;
@@ -68,44 +95,35 @@
   border-radius: var(--radius-full);
   text-transform: uppercase;
   letter-spacing: 0.05em;
+  box-shadow: 0 0 10px rgba(232, 73, 15, 0.5);
 }
 
-/* ---------- TRACK DETAIL AREA ---------- */
+/* ---------- TRACK DETAIL ---------- */
 .track-detail {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-lg);
+  position: relative;
+  z-index: 1;
 }
 
 .track-detail-header {
   display: flex;
   align-items: flex-start;
   gap: var(--spacing-lg);
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
   border-left: 4px solid;
   border-radius: var(--radius-lg);
   padding: var(--spacing-lg);
 }
 
-.track-detail-icon {
-  font-size: 2.5rem;
-  flex-shrink: 0;
-}
+.track-detail-icon { font-size: 2.5rem; flex-shrink: 0; }
+.track-detail-header h2 { font-size: 1.3rem; font-weight: 700; margin-bottom: var(--spacing-xs); }
+.track-detail-header p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; }
 
-.track-detail-header h2 {
-  font-size: 1.3rem;
-  font-weight: 700;
-  margin-bottom: var(--spacing-xs);
-}
-
-.track-detail-header p {
-  font-size: 0.9rem;
-  color: var(--text-secondary);
-  line-height: 1.6;
-}
-
-/* ---------- PRIORITY AND AVOIDS GRID ---------- */
+/* ---------- PRIORITY AND AVOIDS ---------- */
 .track-detail-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -113,13 +131,20 @@
 }
 
 .track-detail-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
   border-radius: var(--radius-lg);
   padding: var(--spacing-lg);
   display: flex;
   flex-direction: column;
   gap: var(--spacing-sm);
+  transition: all var(--transition-normal);
+}
+
+.track-detail-card:hover {
+  background: var(--glass-bg-hover);
+  border-color: var(--glass-border-hover);
 }
 
 .track-detail-card-title {
@@ -146,14 +171,11 @@
   border-radius: 50%;
   flex-shrink: 0;
   margin-top: 6px;
+  box-shadow: 0 0 6px currentColor;
 }
 
 /* ---------- NUDGES ---------- */
-.track-nudges {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-sm);
-}
+.track-nudges { display: flex; flex-direction: column; gap: var(--spacing-sm); }
 
 .track-nudges-title {
   font-size: 0.72rem;
@@ -163,11 +185,7 @@
   color: var(--text-muted);
 }
 
-.track-nudges-list {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-sm);
-}
+.track-nudges-list { display: flex; flex-direction: column; gap: var(--spacing-sm); }
 
 .nudge-card {
   display: flex;
@@ -178,36 +196,34 @@
   font-size: 0.88rem;
   line-height: 1.5;
   border: 1px solid transparent;
+  backdrop-filter: blur(8px);
 }
 
 .nudge-card.nudge-green {
-  background: var(--status-green-bg);
-  border-color: rgba(46, 204, 113, 0.25);
+  background: rgba(111, 207, 74, 0.08);
+  border-color: rgba(111, 207, 74, 0.2);
   color: var(--status-green);
 }
 
 .nudge-card.nudge-yellow {
-  background: var(--status-yellow-bg);
-  border-color: rgba(244, 208, 63, 0.25);
+  background: rgba(244, 208, 63, 0.08);
+  border-color: rgba(244, 208, 63, 0.2);
   color: var(--status-yellow);
 }
 
 .nudge-card.nudge-red {
-  background: var(--status-red-bg);
-  border-color: rgba(231, 76, 60, 0.25);
+  background: rgba(231, 76, 60, 0.08);
+  border-color: rgba(231, 76, 60, 0.2);
   color: var(--status-red);
 }
 
-.nudge-icon {
-  font-size: 1rem;
-  flex-shrink: 0;
-  margin-top: 1px;
-}
+.nudge-icon { font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
 
-/* ---------- 5 YEAR MILESTONE TIMELINE ---------- */
+/* ---------- 5 YEAR TIMELINE ---------- */
 .milestones-section {
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
   border-radius: var(--radius-lg);
   padding: var(--spacing-xl);
 }
@@ -219,11 +235,7 @@
   margin-bottom: var(--spacing-xl);
 }
 
-.milestones-timeline {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-}
+.milestones-timeline { display: flex; flex-direction: column; gap: 0; }
 
 .milestone-item {
   display: flex;
@@ -231,7 +243,6 @@
   align-items: flex-start;
 }
 
-/* Year bubble column */
 .milestone-year-col {
   display: flex;
   flex-direction: column;
@@ -254,16 +265,16 @@
   letter-spacing: 0.04em;
   text-align: center;
   flex-shrink: 0;
+  box-shadow: 0 0 20px rgba(0,0,0,0.4), 0 0 16px rgba(255,255,255,0.1) inset;
 }
 
 .milestone-connector {
   width: 2px;
   height: 40px;
-  background: var(--border-color);
+  background: rgba(255, 255, 255, 0.08);
   margin: 4px 0;
 }
 
-/* Milestone content */
 .milestone-content {
   flex: 1;
   padding-bottom: var(--spacing-lg);
@@ -297,27 +308,6 @@
 
 /* ---------- RESPONSIVE ---------- */
 @media (max-width: 1024px) {
-  .tracks-selector {
-    grid-template-columns: 1fr;
-  }
-
-  .track-detail-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 768px) {
-  .milestone-item {
-    flex-direction: column;
-  }
-
-  .milestone-year-col {
-    flex-direction: row;
-    width: 100%;
-    gap: var(--spacing-sm);
-  }
-
-  .milestone-connector {
-    display: none;
-  }
+  .tracks-selector { grid-template-columns: 1fr; }
+  .track-detail-grid { grid-template-columns: 1fr; }
 }

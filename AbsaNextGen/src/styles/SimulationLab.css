@@ -1,21 +1,43 @@
+/* ============================================
+   SIMULATION LAB STYLES — UI POLISH
+   File location: src/styles/SimulationLab.css
+   ============================================ */
+
 .simlab-wrapper {
   max-width: 1100px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   gap: var(--spacing-xl);
+  position: relative;
 }
 
 /* ---------- INTRO BANNER ---------- */
 .simlab-banner {
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
   border-radius: var(--radius-lg);
   padding: var(--spacing-xl);
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: var(--spacing-xl);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle glow inside banner */
+.simlab-banner::after {
+  content: '';
+  position: absolute;
+  bottom: -20px;
+  right: 10%;
+  width: 200px;
+  height: 100px;
+  background: radial-gradient(ellipse, rgba(0, 201, 177, 0.2) 0%, transparent 70%);
+  filter: blur(20px);
+  pointer-events: none;
 }
 
 .simlab-banner-title {
@@ -32,10 +54,7 @@
   max-width: 560px;
 }
 
-.simlab-banner-stat {
-  text-align: right;
-  flex-shrink: 0;
-}
+.simlab-banner-stat { text-align: right; flex-shrink: 0; }
 
 .simlab-banner-stat-label {
   font-size: 0.72rem;
@@ -50,12 +69,10 @@
   font-size: 2rem;
   font-weight: 800;
   color: var(--accent-teal);
+  text-shadow: 0 0 20px rgba(0, 201, 177, 0.4);
 }
 
-.simlab-banner-stat-sub {
-  font-size: 0.78rem;
-  color: var(--text-muted);
-}
+.simlab-banner-stat-sub { font-size: 0.78rem; color: var(--text-muted); }
 
 /* ---------- STUDIO CARDS ---------- */
 .simlab-studios {
@@ -65,8 +82,10 @@
 }
 
 .studio-card {
-  background: var(--bg-card);
-  border: 2px solid var(--border-color);
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 2px solid var(--glass-border);
   border-radius: var(--radius-lg);
   padding: var(--spacing-xl);
   cursor: pointer;
@@ -78,27 +97,42 @@
   overflow: hidden;
 }
 
+/* Top colour line on hover */
 .studio-card::before {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  height: 3px;
+  height: 2px;
   background: var(--studio-colour);
   opacity: 0;
   transition: opacity var(--transition-normal);
 }
 
-.studio-card:hover {
-  border-color: var(--studio-colour);
-  transform: translateY(-4px);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+/* Bottom glow */
+.studio-card::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 15%;
+  right: 15%;
+  height: 70px;
+  background: radial-gradient(ellipse, var(--studio-colour) 0%, transparent 70%);
+  opacity: 0.15;
+  filter: blur(14px);
+  pointer-events: none;
+  transition: opacity var(--transition-normal);
 }
 
-.studio-card:hover::before {
-  opacity: 1;
+.studio-card:hover {
+  border-color: var(--studio-colour);
+  transform: translateY(-5px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
 }
+
+.studio-card:hover::before { opacity: 1; }
+.studio-card:hover::after { opacity: 0.35; }
 
 .studio-card-top {
   display: flex;
@@ -107,9 +141,7 @@
   margin-bottom: var(--spacing-sm);
 }
 
-.studio-icon {
-  font-size: 2.2rem;
-}
+.studio-icon { font-size: 2.2rem; }
 
 .studio-tag {
   font-size: 0.68rem;
@@ -117,20 +149,17 @@
   text-transform: uppercase;
   letter-spacing: 0.06em;
   color: var(--studio-colour);
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.04);
   padding: 4px 10px;
   border-radius: var(--radius-full);
   border: 1px solid var(--studio-colour);
   text-align: right;
   max-width: 130px;
   line-height: 1.3;
+  backdrop-filter: blur(8px);
 }
 
-.studio-title {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: var(--text-primary);
-}
+.studio-title { font-size: 1.1rem; font-weight: 700; color: var(--text-primary); }
 
 .studio-subtitle {
   font-size: 0.8rem;
@@ -138,6 +167,7 @@
   color: var(--studio-colour);
   text-transform: uppercase;
   letter-spacing: 0.05em;
+  text-shadow: 0 0 10px var(--studio-colour);
 }
 
 .studio-desc {
@@ -155,22 +185,11 @@
   color: var(--studio-colour);
 }
 
-.studio-card:hover .studio-cta {
-  text-decoration: underline;
-}
+.studio-card:hover .studio-cta { text-decoration: underline; }
 
 /* ---------- RESPONSIVE ---------- */
 @media (max-width: 1024px) {
-  .simlab-studios {
-    grid-template-columns: 1fr;
-  }
-
-  .simlab-banner {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .simlab-banner-stat {
-    text-align: left;
-  }
+  .simlab-studios { grid-template-columns: 1fr; }
+  .simlab-banner { flex-direction: column; align-items: flex-start; }
+  .simlab-banner-stat { text-align: left; }
 }
