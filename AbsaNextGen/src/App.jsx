@@ -10,7 +10,6 @@ import LifestyleStudio from './pages/LifestyleStudio';
 import LifePathStudio from './pages/LifePathStudio';
 import FutureWealthStudio from './pages/FutureWealthStudio';
 import BankingWrapped from './pages/BankingWrapped';
-import ChatBot from './pages/ChatBot';
 
 const Placeholder = ({ name }) => (
   <div style={{
@@ -54,7 +53,7 @@ function AppRoutes() {
           <Route path="/simulation-lab/life-path-studio" element={<LifePathStudio />} />
           <Route path="/simulation-lab/future-wealth-studio" element={<FutureWealthStudio />} />
           <Route path="/banking-wrapped" element={<BankingWrapped />} />
-          <Route path="/chatbot" element={<ChatBot />} />
+          <Route path="/chatbot" element={<Placeholder name="ChatBot" />} />
           <Route path="/profile" element={<Placeholder name="Profile" />} />
           <Route path="/settings" element={<Placeholder name="Settings" />} />
 
