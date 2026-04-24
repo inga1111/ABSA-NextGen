@@ -81,9 +81,6 @@ function Landing({ initialMode = 'signup' }) {
               <button type="button" className="auth-social-btn google">
                 <span>Google</span>
               </button>
-              <button type="button" className="auth-social-btn github">
-                <span>Github</span>
-              </button>
             </div>
           )}
 
@@ -99,7 +96,7 @@ function Landing({ initialMode = 'signup' }) {
                     name="firstName"
                     value={formData.firstName}
                     onChange={handleChange}
-                    placeholder="eg. John"
+                    placeholder="eg. Asakhe"
                   />
                 </label>
                 <label>
@@ -109,7 +106,7 @@ function Landing({ initialMode = 'signup' }) {
                     name="lastName"
                     value={formData.lastName}
                     onChange={handleChange}
-                    placeholder="eg. Francisco"
+                    placeholder="eg. Khumalo"
                   />
                 </label>
               </div>
@@ -122,7 +119,7 @@ function Landing({ initialMode = 'signup' }) {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                placeholder="eg. johnfrans@gmail.com"
+                placeholder="eg. asakhe.khumalo@gmail.com"
               />
             </label>
 
