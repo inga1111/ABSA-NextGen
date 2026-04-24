@@ -2,7 +2,10 @@ import { useState, useRef, useEffect } from 'react';
 import { useUser } from '../context/UserContext';
 import '../styles/ChatBot.css';
 
-
+// ─────────────────────────────────────────────
+// SUGGESTED QUESTIONS
+// These appear as quick-tap buttons
+// ─────────────────────────────────────────────
 const SUGGESTED = [
   'Am I saving enough?',
   'What is a TFSA?',
@@ -16,7 +19,11 @@ const SUGGESTED = [
   'What is a bond?',
 ];
 
-
+// ─────────────────────────────────────────────
+// RULE-BASED RESPONSE ENGINE
+// Takes the user's message + their financial
+// data and returns a personalised response
+// ─────────────────────────────────────────────
 function generateResponse(message, userData, formatCurrency) {
   const msg = message.toLowerCase();
   const {
