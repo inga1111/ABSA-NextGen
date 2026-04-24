@@ -11,6 +11,8 @@ import LifePathStudio from './pages/LifePathStudio';
 import FutureWealthStudio from './pages/FutureWealthStudio';
 import BankingWrapped from './pages/BankingWrapped';
 import ChatBot from './pages/ChatBot';
+import Profile from './pages/Profile';
+import Settings from './pages/Settings';
 
 const Placeholder = ({ name }) => (
   <div style={{
@@ -55,8 +57,8 @@ function AppRoutes() {
           <Route path="/simulation-lab/future-wealth-studio" element={<FutureWealthStudio />} />
           <Route path="/banking-wrapped" element={<BankingWrapped />} />
           <Route path="/chatbot" element={<ChatBot />} />
-          <Route path="/profile" element={<Placeholder name="Profile" />} />
-          <Route path="/settings" element={<Placeholder name="Settings" />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/settings" element={<Settings />} />
 
           {/* Catch all unknown routes back to dashboard */}
           <Route path="*" element={<Navigate to="/dashboard" replace />} />
