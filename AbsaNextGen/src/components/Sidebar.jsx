@@ -35,13 +35,13 @@ const NAV_ITEMS = [
   },
 ];
 
-function Sidebar() {
+function Sidebar({ isOpen = true }) {
   const { userData } = useUser();
   const location = useLocation();
   const isSimLabActive = location.pathname.startsWith('/simulation-lab');
 
   return (
-    <div className="sidebar">
+    <div className={`sidebar ${isOpen ? 'open' : ''}`}>
 
       {/* ---- TOP: ABSA Logo ---- */}
       <div className="sidebar-logo">

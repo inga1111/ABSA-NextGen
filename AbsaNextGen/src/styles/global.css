@@ -398,6 +398,9 @@ ul, ol { list-style: none; }
 @media (max-width: 1024px) {
   .grid-4 { grid-template-columns: repeat(2, 1fr); }
   .grid-3 { grid-template-columns: repeat(2, 1fr); }
+  :root {
+    --sidebar-width: 200px;
+  }
 }
 
 @media (max-width: 768px) {
@@ -407,4 +410,35 @@ ul, ol { list-style: none; }
   }
   .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
   h1 { font-size: 1.5rem; }
+
+  .mobile-menu-btn {
+    position: fixed;
+    top: var(--spacing-md);
+    left: var(--spacing-md);
+    z-index: 101;
+    background: var(--bg-card);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    padding: var(--spacing-sm);
+    cursor: pointer;
+    backdrop-filter: blur(10px);
+    transition: all var(--transition-fast);
+  }
+
+  .mobile-menu-btn:hover {
+    background: var(--bg-card-hover);
+    border-color: var(--glass-border-hover);
+  }
+
+  .mobile-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 99;
+  }
 }

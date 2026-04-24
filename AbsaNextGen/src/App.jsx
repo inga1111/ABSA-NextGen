@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { useState } from 'react';
 import { UserProvider, useUser } from './context/UserContext';
 import './styles/global.css';
 import Onboarding from './pages/Onboarding';
@@ -28,6 +29,7 @@ const Placeholder = ({ name }) => (
 
 function AppRoutes() {
   const { hasOnboarded } = useUser();
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   
   if (!hasOnboarded) {
@@ -40,7 +42,24 @@ function AppRoutes() {
 
       {/* Sidebar — swap this placeholder when we build Sidebar.jsx */}
       {/* <Sidebar /> */}
-      <Sidebar />
+      <Sidebar isOpen={sidebarOpen} />
+
+      {/* Mobile overlay */}
+      {sidebarOpen && (
+        <div 
+          className="mobile-overlay"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
+      {/* Mobile hamburger menu */}
+      <button 
+        className="mobile-menu-btn"
+        onClick={() => setSidebarOpen(!sidebarOpen)}
+        aria-label="Toggle menu"
+      >
+        ☰
+      </button>
 
       {/* All pages render here */}
       <div className="main-content">
