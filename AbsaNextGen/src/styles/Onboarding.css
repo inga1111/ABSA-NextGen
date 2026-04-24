@@ -78,22 +78,22 @@
   background: rgba(255, 255, 255, 0.04);
   backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-left: 3px solid var(--absa-orange);
+  border-left: 3px solid var(--absa-red);
   border-radius: var(--radius-md);
   padding: var(--spacing-lg);
   position: relative;
   z-index: 1;
-  box-shadow: 0 0 30px rgba(232, 73, 15, 0.1);
+  box-shadow: 0 0 30px rgba(204, 0, 0, 0.1);
 }
 
 .quote-mark {
   font-size: 3rem;
-  color: var(--absa-orange);
+  color: var(--absa-red);
   line-height: 1;
   display: block;
   margin-bottom: -10px;
   font-family: Georgia, serif;
-  text-shadow: 0 0 20px rgba(222, 6, 6, 0.899);
+  text-shadow: 0 0 20px rgba(204, 0, 0, 0.899);
 }
 
 .onboarding-quote p {
@@ -118,7 +118,7 @@
 }
 
 .onboarding-tagline strong {
-  color: var(--absa-orange);
+  color: var(--absa-red);
 }
 
 /* ---------- RIGHT PANEL ---------- */
@@ -151,7 +151,7 @@
   transition: color var(--transition-normal);
 }
 
-.progress-label.active { color: var(--absa-orange); }
+.progress-label.active { color: var(--absa-red); }
 .progress-label.done { color: var(--status-green); }
 
 .progress-bar {
@@ -294,7 +294,7 @@
 .goal-card.selected {
   border-color: var(--absa-orange);
   background: rgba(232, 73, 15, 0.08);
-  box-shadow: var(--glow-orange);
+  box-shadow: var(--glow-red);
 }
 
 .goal-card.selected::after {
@@ -353,7 +353,7 @@
 }
 
 .btn-next:hover {
-  box-shadow: var(--glow-orange);
+  box-shadow: var(--glow-red);
   transform: translateY(-1px);
 }
 
@@ -369,7 +369,7 @@
 }
 
 .btn-submit:hover:not(:disabled) {
-  box-shadow: var(--glow-orange);
+  box-shadow: var(--glow-red);
   transform: translateY(-1px);
 }
 

@@ -2,9 +2,8 @@
 
 /* ---------- CSS VARIABLES ---------- */
 :root {
-  /* Core brand */
-  --absa-red: #cc0000;
-  --absa-orange: #e31818c6;
+  --absa-red: #c90000;
+  --absa-orange: #ff0000c6;
 
   /* Dark navy backgrounds — matches wireframe exactly */
   --bg-primary: #0d1117;
