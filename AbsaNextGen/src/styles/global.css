@@ -1,23 +1,17 @@
-/* ============================================
-   ABSA NEXTGEN WEALTH STUDIO — GLOBAL CSS
-   UI POLISH: Glassmorphism + Gradients + Glow
-   File location: src/styles/global.css
-   ============================================ */
-
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
 /* ---------- CSS VARIABLES ---------- */
 :root {
   /* Core brand */
-  --absa-red: #CC0000;
-  --absa-orange: #E8490F;
+  --absa-red: #cc0000;
+  --absa-orange: #e31818c6;
 
   /* Dark navy backgrounds — matches wireframe exactly */
   --bg-primary: #0d1117;
-  --bg-secondary: #131c2e;
+  --bg-secondary: #1b2029;
   --bg-card: rgba(255, 255, 255, 0.04);
   --bg-card-hover: rgba(255, 255, 255, 0.07);
-  --bg-sidebar: #0a0f1e;
+  --bg-sidebar: #0f1119;
 
   /* Glass morphism */
   --glass-bg: rgba(255, 255, 255, 0.05);
@@ -32,7 +26,7 @@
   --text-muted: rgba(255, 255, 255, 0.35);
 
   /* Status colours */
-  --status-green: #6FCF4A;
+  --status-green: #499a28;
   --status-green-bg: rgba(111, 207, 74, 0.12);
   --status-yellow: #F4D03F;
   --status-yellow-bg: rgba(244, 208, 63, 0.12);
@@ -40,10 +34,10 @@
   --status-red-bg: rgba(231, 76, 60, 0.12);
 
   /* Accent colours */
-  --accent-teal: #00C9B1;
-  --accent-blue: #6B9FFF;
-  --accent-purple: #A855F7;
-  --accent-pink: #EC4899;
+  --accent-teal: #00c9b1b0;
+  --accent-blue: #5db0f8da;
+  --accent-purple: #cf55f7cf;
+  --accent-pink: #f668afea;
 
   /* Gradients */
   --gradient-primary: linear-gradient(135deg, #E8490F 0%, #CC0000 100%);
@@ -66,8 +60,8 @@
   --shadow-glow-teal: var(--glow-teal);
 
   /* Borders */
-  --border-color: rgba(255, 255, 255, 0.08);
-  --border-color-hover: rgba(255, 255, 255, 0.18);
+  --border-color: rgba(255, 255, 255, 0.412);
+  --border-color-hover: rgba(255, 255, 255, 0.553);
 
   /* Spacing */
   --spacing-xs: 4px;
@@ -158,7 +152,7 @@ ul, ol { list-style: none; }
   background: var(--glass-bg);
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
-  border: 1px solid var(--glass-border);
+  border: 1.9px solid var(--glass-border);
   border-radius: var(--radius-lg);
   padding: var(--spacing-lg);
   transition: all var(--transition-normal);

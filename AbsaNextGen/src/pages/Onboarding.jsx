@@ -484,7 +484,7 @@ function Onboarding() {
                 onClick={handleSubmit}
                 disabled={!formData.primaryGoal}
               >
-                Let's Go 🚀
+                Let's Go!
               </button>
             )}
           </div>
