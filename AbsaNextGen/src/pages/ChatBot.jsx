@@ -60,8 +60,7 @@ function generateResponse(message, userData, formatCurrency) {
 
   // ── SAVINGS RATE ──
   if (msg.includes('savings rate') || msg.includes('my rate')) {
-    return `Your current savings rate is ${savingsRate}%${name}. This means you're saving ${formatCurrency(totalSavings)} out of your net monthly income of ${formatCurrency(netMonthly)}. Financial experts recommend saving at least 20% of your net income. ${savingsRate >= 20 ? "You're doing great! 💚" : 'There's room to grow — small increases add up fast.'}`;
-  }
+return `Your current savings rate is ${savingsRate}%${name}. This means you're saving ${formatCurrency(totalSavings)} out of your net monthly income of ${formatCurrency(netMonthly)}. Financial experts recommend saving at least 20% of your net income. ${savingsRate >= 20 ? "You're doing great! 💚" : 'There is room to grow - small increases add up fast.'}`;  }
 
   // ── TFSA ──
   if (msg.includes('tfsa') || msg.includes('tax free') || msg.includes('tax-free')) {
