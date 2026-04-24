@@ -55,7 +55,7 @@
   letter-spacing: 0.05em;
   text-transform: lowercase;
   flex-shrink: 0;
-  box-shadow: 0 0 16px rgba(204, 0, 0, 0.405);
+  box-shadow: 0 0 16px rgba(204, 0, 0, 0.3);
 }
 
 .sidebar-logo-text {
@@ -96,7 +96,7 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  box-shadow: 0 0 12px rgba(232, 73, 15, 0.4);
+  box-shadow: 0 0 12px rgba(232, 73, 15, 0.3);
 }
 
 .sidebar-user-info {
@@ -186,7 +186,7 @@
   width: 3px;
   background: var(--gradient-primary);
   border-radius: 0 3px 3px 0;
-  box-shadow: 0 0 8px rgba(232, 73, 15, 0.6);
+  box-shadow: 0 0 8px rgba(232, 73, 15, 0.5);
 }
 
 .sidebar-nav-icon {
@@ -206,7 +206,7 @@
   border-radius: 50%;
   background: var(--absa-orange);
   flex-shrink: 0;
-  box-shadow: 0 0 6px rgba(232, 73, 15, 0.8);
+  box-shadow: 0 0 6px rgba(232, 73, 15, 0.7);
 }
 
 /* ---------- CHATBOT BUTTON ---------- */
