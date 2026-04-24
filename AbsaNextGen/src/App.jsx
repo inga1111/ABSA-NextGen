@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { useState } from 'react';
 import { UserProvider, useUser } from './context/UserContext';
 import './styles/global.css';
+import Landing from './pages/Landing';
 import Onboarding from './pages/Onboarding';
 import Sidebar from './components/Sidebar';
 import Dashboard from './pages/Dashboard';
@@ -31,12 +32,18 @@ function AppRoutes() {
   const { hasOnboarded } = useUser();
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  
   if (!hasOnboarded) {
-    return <Onboarding />;
+    return (
+      <Routes>
+        <Route path="/" element={<Landing />} />
+        <Route path="/login" element={<Landing initialMode="login" />} />
+        <Route path="/signup" element={<Landing initialMode="signup" />} />
+        <Route path="/onboarding" element={<Onboarding />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    );
   }
 
-  
   return (
     <div className="app-layout">
 
