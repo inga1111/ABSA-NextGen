@@ -1,37 +1,38 @@
 import { NavLink, useLocation } from 'react-router-dom';
 import { useUser } from '../context/UserContext';
+import SymbolIcon from '../components/SymbolIcon';
 import '../styles/Sidebar.css';
 
 const NAV_ITEMS = [
   {
     label: 'Dashboard',
     path: '/dashboard',
-    icon: '⊞',
+    icon: 'dashboard',
   },
   {
     label: 'Strategy Tracks',
     path: '/strategy-tracks',
-    icon: '🎯',
+    icon: 'strategy',
   },
   {
     label: 'Simulation Lab',
     path: '/simulation-lab',
-    icon: '🧪',
+    icon: 'simulation',
   },
   {
     label: 'Banking Wrapped',
     path: '/banking-wrapped',
-    icon: '🎵',
+    icon: 'banking',
   },
   {
     label: 'Profile',
     path: '/profile',
-    icon: '👤',
+    icon: 'profile',
   },
   {
     label: 'Settings',
     path: '/settings',
-    icon: '⚙️',
+    icon: 'settings',
   },
 ];
 
@@ -88,7 +89,7 @@ function Sidebar({ isOpen = true }) {
               to={item.path}
               className={`sidebar-nav-item ${isActive ? 'active' : ''}`}
             >
-              <span className="sidebar-nav-icon">{item.icon}</span>
+              <SymbolIcon name={item.icon} className="sidebar-nav-icon" />
               <span className="sidebar-nav-label-text">{item.label}</span>
 
               {/* Active indicator dot */}
@@ -105,7 +106,7 @@ function Sidebar({ isOpen = true }) {
           to="/chatbot"
           className={`sidebar-chatbot-btn ${location.pathname === '/chatbot' ? 'active' : ''}`}
         >
-          <div className="sidebar-chatbot-icon">💬</div>
+          <SymbolIcon name="chat" className="sidebar-chatbot-icon" />
           <div className="sidebar-chatbot-text">
             <span className="sidebar-chatbot-title">Ask our ChatBot</span>
             <span className="sidebar-chatbot-sub">Financial assistant</span>

@@ -1,6 +1,7 @@
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 import { useUser } from '../context/UserContext';
 import { useNavigate } from 'react-router-dom';
+import SymbolIcon from '../components/SymbolIcon';
 import '../styles/Dashboard.css';
 
 
@@ -254,7 +255,7 @@ function Dashboard() {
 
           {/* Spending insight */}
           <div className={`insight-card ${spendingPercent > 80 ? 'insight-red' : spendingPercent > 60 ? 'insight-yellow' : 'insight-green'}`}>
-            <div className="insight-icon">💸</div>
+            <SymbolIcon name="spending" className="insight-icon" />
             <div className="insight-content">
               <div className="insight-title">Spending</div>
               <div className="insight-message">
@@ -265,7 +266,7 @@ function Dashboard() {
 
           {/* Savings insight */}
           <div className={`insight-card ${(savingsRate || 0) >= 20 ? 'insight-green' : (savingsRate || 0) >= 10 ? 'insight-yellow' : 'insight-red'}`}>
-            <div className="insight-icon">💰</div>
+            <SymbolIcon name="savings" className="insight-icon" />
             <div className="insight-content">
               <div className="insight-title">Savings Rate</div>
               <div className="insight-message">
@@ -277,7 +278,7 @@ function Dashboard() {
 
           {/* Leftover insight */}
           <div className={`insight-card ${leftover > 0 ? 'insight-green' : 'insight-red'}`}>
-            <div className="insight-icon">🏦</div>
+            <SymbolIcon name="wallet" className="insight-icon" />
             <div className="insight-content">
               <div className="insight-title">Monthly Leftover</div>
               <div className="insight-message">
@@ -288,7 +289,7 @@ function Dashboard() {
 
           {/* Debt insight */}
           <div className={`insight-card ${totalDebt === 0 ? 'insight-green' : totalDebt < netMonthly * 0.3 ? 'insight-yellow' : 'insight-red'}`}>
-            <div className="insight-icon">📋</div>
+            <SymbolIcon name="debt" className="insight-icon" />
             <div className="insight-content">
               <div className="insight-title">Debt Obligations</div>
               <div className="insight-message">
@@ -311,28 +312,28 @@ function Dashboard() {
       {/* ---- BOTTOM ROW: Summary stats ---- */}
       <div className="dashboard-bottom-row">
         <div className="summary-stat-card">
-          <div className="summary-stat-icon">🏠</div>
+          <SymbolIcon name="home" className="summary-stat-icon" />
           <div className="summary-stat-label">Fixed Expenses</div>
           <div className="summary-stat-value">{formatCurrency(totalFixedExpenses)}</div>
           <div className="summary-stat-sub">per month</div>
         </div>
 
         <div className="summary-stat-card">
-          <div className="summary-stat-icon">🛍️</div>
+          <SymbolIcon name="shopping" className="summary-stat-icon" />
           <div className="summary-stat-label">Lifestyle Expenses</div>
           <div className="summary-stat-value">{formatCurrency(totalFlexibleExpenses)}</div>
           <div className="summary-stat-sub">per month</div>
         </div>
 
         <div className="summary-stat-card">
-          <div className="summary-stat-icon">💎</div>
+          <SymbolIcon name="savings" className="summary-stat-icon" />
           <div className="summary-stat-label">Savings</div>
           <div className="summary-stat-value">{formatCurrency(monthlySavings)}</div>
           <div className="summary-stat-sub">per month</div>
         </div>
 
         <div className="summary-stat-card">
-          <div className="summary-stat-icon">📈</div>
+          <SymbolIcon name="growth" className="summary-stat-icon" />
           <div className="summary-stat-label">Investments</div>
           <div className="summary-stat-value">{formatCurrency(monthlyInvestments)}</div>
           <div className="summary-stat-sub">per month</div>

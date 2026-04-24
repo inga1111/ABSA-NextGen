@@ -98,10 +98,6 @@ function generateWrappedData(userData) {
   };
 }
 
-// ─────────────────────────────────────────────
-// Single reveal card component
-// Flips over when clicked to show the stat
-// ─────────────────────────────────────────────
 function WrappedCard({ number, frontLabel, backContent, delay }) {
   const [flipped, setFlipped] = useState(false);
 
