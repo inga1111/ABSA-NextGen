@@ -2,18 +2,18 @@
 
 /* ---------- CSS VARIABLES ---------- */
 :root {
-  --absa-red: #c90000;
-  --absa-orange: #ff0000c6;
+  --absa-red: #c00000;
+  --absa-orange: #de0000c6;
 
   /* Dark navy backgrounds — matches wireframe exactly */
-  --bg-primary: #0d1117;
-  --bg-secondary: #1b2029;
-  --bg-card: rgba(255, 255, 255, 0.04);
+  --bg-primary: #1a1a1c;
+  --bg-secondary: #1d1e20;
+  --bg-card: rgba(255, 255, 255, 0.148);
   --bg-card-hover: rgba(255, 255, 255, 0.07);
-  --bg-sidebar: #0f1119;
+  --bg-sidebar: #1c1c1dd8;
 
   /* Glass morphism */
-  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-bg: rgba(119, 7, 7, 0.05);
   --glass-bg-hover: rgba(255, 255, 255, 0.08);
   --glass-border: rgba(255, 255, 255, 0.1);
   --glass-border-hover: rgba(255, 255, 255, 0.2);
@@ -39,14 +39,14 @@
   --accent-pink: #f668afea;
 
   /* Gradients */
-  --gradient-primary: linear-gradient(135deg, #E8490F 0%, #CC0000 100%);
+  --gradient-primary: linear-gradient(135deg, #e8490f6a 0%, #cc0000d3 100%);
   --gradient-teal: linear-gradient(135deg, #00C9B1 0%, #0099FF 100%);
   --gradient-purple: linear-gradient(135deg, #A855F7 0%, #6B21A8 100%);
   --gradient-blue: linear-gradient(135deg, #6B9FFF 0%, #3B5BDB 100%);
 
   /* Glow effects */
-  --glow-orange: 0 0 30px rgba(232, 73, 15, 0.35), 0 0 60px rgba(232, 73, 15, 0.15);
-  --glow-red: 0 0 30px rgba(204, 0, 0, 0.35), 0 0 60px rgba(204, 0, 0, 0.15);
+  --glow-orange: 0 0 30px rgba(104, 1, 1, 0.514), 0 0 60px rgba(232, 73, 15, 0.15);
+  --glow-red: 0 0 30px rgba(204, 0, 0, 0.438), 0 0 60px rgba(204, 0, 0, 0.15);
   --glow-teal: 0 0 30px rgba(0, 201, 177, 0.35), 0 0 60px rgba(0, 201, 177, 0.15);
   --glow-blue: 0 0 30px rgba(107, 159, 255, 0.35), 0 0 60px rgba(107, 159, 255, 0.15);
   --glow-purple: 0 0 30px rgba(168, 85, 247, 0.35), 0 0 60px rgba(168, 85, 247, 0.15);
@@ -78,7 +78,7 @@
   --radius-full: 9999px;
 
   /* Sidebar */
-  --sidebar-width: 220px;
+  --sidebar-width: 250px;
 
   /* Transitions */
   --transition-fast: 0.15s ease;
@@ -146,7 +146,6 @@ ul, ol { list-style: none; }
 }
 
 /* ---------- GLASSMORPHISM CARD ---------- */
-/* This is the core glass card style used everywhere */
 .card {
   background: var(--glass-bg);
   backdrop-filter: var(--glass-blur);
