@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useUser } from '../context/UserContext';
+import SymbolIcon from '../components/SymbolIcon';
 import '../styles/StrategyTracks.css';
 
  
@@ -146,7 +147,7 @@ const TRACK_MILESTONES = {
 const TRACKS = [
   {
     id: 'property',
-    icon: '🏠',
+    icon: 'home',
     title: 'Property-Focused Track',
     tagline: 'Build toward property ownership within 3-5 years',
     description: 'Ideal if you are currently renting, have a stable income but limited savings, and want to own a home within the next 3-5 years.',
@@ -164,7 +165,7 @@ const TRACKS = [
   },
   {
     id: 'balanced',
-    icon: '⚖️',
+    icon: 'strategy',
     title: 'Balanced Lifestyle Track',
     tagline: 'Maintain your lifestyle while building financial stability',
     description: 'Ideal if you value lifestyle experiences, want to build wealth without extreme restriction, and prefer a sustainable low-stress approach.',
@@ -182,7 +183,7 @@ const TRACKS = [
   },
   {
     id: 'growth',
-    icon: '📈',
+    icon: 'growth',
     title: 'Aggressive Growth Track',
     tagline: 'Maximise wealth growth and long-term financial independence',
     description: 'Ideal if you already have financial stability, want to maximise long-term wealth, and are comfortable with calculated financial risk.',
@@ -246,14 +247,41 @@ function getNudges(trackId, userData) {
   return nudges;
 }
 
+const MILESTONE_STATUS_ORDER = ['not-started', 'started', 'in-progress', 'completed'];
+const MILESTONE_STATUS_CONFIG = {
+  'not-started': { label: 'Not started', color: '#9CA3AF' },
+  started: { label: 'Started', color: '#3B82F6' },
+  'in-progress': { label: 'In progress', color: '#00C9B1' },
+  completed: { label: 'Completed', color: '#8B5CF6' },
+};
+
 function StrategyTracks() {
   const { userData, formatCurrency, selectedTrack, setSelectedTrack } = useUser();
   const [activeTrack, setActiveTrack] = useState(
     selectedTrack || userData.primaryGoal || 'property'
   );
+  const [milestoneProgress, setMilestoneProgress] = useState(() => {
+    return Object.fromEntries(
+      Object.entries(TRACK_MILESTONES).map(([trackId, items]) => [
+        trackId,
+        Object.fromEntries(items.map((milestone) => [milestone.year, 'not-started'])),
+      ])
+    );
+  });
 
-  const currentTrack = TRACKS.find(t => t.id === activeTrack);
-  const milestones = TRACK_MILESTONES[activeTrack];
+  const currentProgress = milestoneProgress[activeTrack] || {};
+  const currentTrack = TRACKS.find((track) => track.id === activeTrack) || TRACKS[0];
+  const milestones = TRACK_MILESTONES[activeTrack] || [];
+
+  const updateMilestoneStatus = (year, status) => {
+    setMilestoneProgress((prev) => ({
+      ...prev,
+      [activeTrack]: {
+        ...prev[activeTrack],
+        [year]: status,
+      },
+    }));
+  };
   const nudges = getNudges(activeTrack, userData);
 
   const handleSelectTrack = (trackId) => {
@@ -279,7 +307,7 @@ function StrategyTracks() {
             style={{ '--track-colour': track.colour }}
             onClick={() => handleSelectTrack(track.id)}
           >
-            <div className="track-selector-icon">{track.icon}</div>
+            <SymbolIcon name={track.icon} className="track-selector-icon" size={28} />
             <div className="track-selector-title">{track.title}</div>
             <div className="track-selector-tagline">{track.tagline}</div>
             {userData.primaryGoal === track.id && (
@@ -295,7 +323,7 @@ function StrategyTracks() {
 
           {/* Track header */}
           <div className="track-detail-header" style={{ borderColor: currentTrack.colour }}>
-            <div className="track-detail-icon">{currentTrack.icon}</div>
+            <SymbolIcon name={currentTrack.icon} className="track-detail-icon" size={32} />
             <div>
               <h2 style={{ color: currentTrack.colour }}>{currentTrack.title}</h2>
               <p>{currentTrack.description}</p>
@@ -333,7 +361,10 @@ function StrategyTracks() {
                 {nudges.map((nudge, i) => (
                   <div key={i} className={`nudge-card nudge-${nudge.type}`}>
                     <span className="nudge-icon">
-                      {nudge.type === 'green' ? '✅' : nudge.type === 'yellow' ? '⚠️' : '🚨'}
+                      <SymbolIcon
+                        name={nudge.type === 'green' ? 'check' : nudge.type === 'yellow' ? 'warning' : 'alert'}
+                        size={16}
+                      />
                     </span>
                     {nudge.message}
                   </div>
@@ -343,36 +374,72 @@ function StrategyTracks() {
           )}
 
           {/* ---- 5 YEAR MILESTONE PLAN ---- */}
+          <div className="milestone-progress-strip">
+            {milestones.map((milestone, index) => {
+              const status = currentProgress[milestone.year] || 'not-started';
+              return (
+                <div
+                  key={milestone.year}
+                  className={`milestone-progress-step ${status}`}
+                  style={{ '--step-color': MILESTONE_STATUS_CONFIG[status].color }}
+                >
+                  <div className="step-marker" />
+                  <div className="step-label">{MILESTONE_STATUS_CONFIG[status].label}</div>
+                </div>
+              );
+            })}
+          </div>
+
           <div className="milestones-section">
             <h3>Your 5 Year Milestone Plan</h3>
             <div className="milestones-timeline">
-              {milestones.map((milestone, index) => (
-                <div key={index} className="milestone-item">
-                  {/* Year bubble */}
-                  <div className="milestone-year-col">
-                    <div
-                      className="milestone-year-bubble"
-                      style={{ background: currentTrack.colour }}
-                    >
-                      {milestone.year}
-                    </div>
-                    {index < milestones.length - 1 && (
-                      <div className="milestone-connector" />
-                    )}
-                  </div>
-
-                  {/* Milestone content */}
-                  <div className="milestone-content">
-                    <div className="milestone-title">{milestone.title}</div>
-                    {milestone.items.map((item, j) => (
-                      <div key={j} className="milestone-list-item">
-                        <span className="milestone-dot" style={{ background: currentTrack.colour }} />
-                        {item}
+              {milestones.map((milestone, index) => {
+                const currentStatus = currentProgress[milestone.year] || 'not-started';
+                return (
+                  <div key={index} className="milestone-item">
+                    {/* Year bubble */}
+                    <div className="milestone-year-col">
+                      <div
+                        className={`milestone-year-bubble ${currentStatus}`}
+                        style={{ background: currentTrack.colour }}
+                      >
+                        {milestone.year}
                       </div>
-                    ))}
+                      {index < milestones.length - 1 && (
+                        <div className="milestone-connector" />
+                      )}
+                    </div>
+
+                    {/* Milestone content */}
+                    <div className="milestone-content">
+                      <div className="milestone-header">
+                        <div className="milestone-title">{milestone.title}</div>
+                        <span className={`milestone-status-pill ${currentStatus}`}>
+                          {MILESTONE_STATUS_CONFIG[currentStatus].label}
+                        </span>
+                      </div>
+                      <div className="milestone-actions">
+                        {Object.entries(MILESTONE_STATUS_CONFIG).map(([statusKey, meta]) => (
+                          <button
+                            key={statusKey}
+                            type="button"
+                            className={`milestone-action-btn ${currentStatus === statusKey ? 'active' : ''}`}
+                            onClick={() => updateMilestoneStatus(milestone.year, statusKey)}
+                          >
+                            {meta.label}
+                          </button>
+                        ))}
+                      </div>
+                      {milestone.items.map((item, j) => (
+                        <div key={j} className="milestone-list-item">
+                          <span className="milestone-dot" style={{ background: currentTrack.colour }} />
+                          {item}
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
 

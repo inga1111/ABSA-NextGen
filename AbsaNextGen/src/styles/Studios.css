@@ -396,7 +396,15 @@
   box-shadow: 0 0 16px rgba(107, 159, 255, 0.15);
 }
 
-.location-emoji { font-size: 1.4rem; margin-bottom: 4px; }
+.location-icon {
+  display: inline-flex;
+  width: 1.4rem;
+  height: 1.4rem;
+  margin-bottom: 6px;
+  color: var(--text-primary);
+  justify-content: center;
+  align-items: center;
+}
 .location-name { font-size: 0.78rem; font-weight: 600; color: var(--text-primary); }
 .location-cost { font-size: 0.68rem; color: var(--text-muted); }
 
@@ -422,7 +430,15 @@
   box-shadow: 0 0 16px rgba(0, 201, 177, 0.15);
 }
 
-.lifestyle-emoji { font-size: 1.4rem; margin-bottom: 4px; }
+.lifestyle-icon {
+  display: inline-flex;
+  width: 1.4rem;
+  height: 1.4rem;
+  margin-bottom: 6px;
+  color: var(--text-primary);
+  justify-content: center;
+  align-items: center;
+}
 .lifestyle-label { font-size: 0.8rem; font-weight: 700; color: var(--text-primary); }
 .lifestyle-desc { font-size: 0.68rem; color: var(--text-muted); margin-top: 2px; }
 

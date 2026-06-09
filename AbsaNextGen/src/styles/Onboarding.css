@@ -193,6 +193,9 @@
 }
 
 .form-section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
   font-size: 0.8rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -202,6 +205,11 @@
   margin-top: var(--spacing-xl);
   padding-bottom: var(--spacing-xs);
   border-bottom: 1px solid rgba(0, 201, 177, 0.15);
+}
+
+.section-icon {
+  display: inline-flex;
+  color: var(--accent-teal);
 }
 
 /* ---------- FORM GRID ---------- */
@@ -311,7 +319,17 @@
   pointer-events: none;
 }
 
-.goal-icon { font-size: 2rem; margin-bottom: var(--spacing-sm); }
+.goal-icon {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto var(--spacing-sm);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-primary);
+}
 .goal-title { font-size: 0.95rem; font-weight: 700; color: var(--text-primary); margin-bottom: var(--spacing-xs); }
 .goal-desc { font-size: 0.8rem; color: var(--text-secondary); line-height: 1.5; }
 

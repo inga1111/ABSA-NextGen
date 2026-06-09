@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useUser } from '../context/UserContext';
+import SymbolIcon from '../components/SymbolIcon';
 import '../styles/BankingWrapped.css';
 
 
@@ -19,7 +20,7 @@ function generateWrappedData(userData) {
     savingsRate,
   } = userData;
 
-  // Figure out top spending category
+  
   const categories = [
     { name: 'Restaurants & Dining', amount: Number(dining || 0) },
     { name: 'Groceries', amount: Number(groceries || 0) },
@@ -29,7 +30,7 @@ function generateWrappedData(userData) {
   ];
   const topCategory = [...categories].sort((a, b) => b.amount - a.amount)[0];
 
-  // Simulate 4 weeks of spending
+  
   const weeklySpend = [
     Math.round(totalFlexibleExpenses * 0.30),
     Math.round(totalFlexibleExpenses * 0.22),
@@ -38,7 +39,7 @@ function generateWrappedData(userData) {
   ];
   const biggestSpendWeek = weeklySpend.indexOf(Math.max(...weeklySpend)) + 1;
 
-  // Simulate 4 weeks of saving
+  
   const weeklySave = [
     Math.round(monthlySavings * 0.40),
     Math.round(monthlySavings * 0.25),
@@ -47,35 +48,35 @@ function generateWrappedData(userData) {
   ];
   const bestSaveWeek = weeklySave.indexOf(Math.max(...weeklySave)) + 1;
 
-  // Behaviour classification based on savings rate
-  let behaviourLabel, behaviourDesc, behaviourEmoji;
+  
+  let behaviourLabel, behaviourDesc, behaviourIcon;
   if (savingsRate >= 25) {
     behaviourLabel = 'The Wealth Builder';
     behaviourDesc = "You're disciplined, focused and playing the long game. Future you says thank you.";
-    behaviourEmoji = '💎';
+    behaviourIcon = 'growth';
   } else if (savingsRate >= 15) {
     behaviourLabel = 'The Balanced Planner';
     behaviourDesc = "You enjoy life but keep an eye on the future. A solid foundation is forming.";
-    behaviourEmoji = '⚖️';
+    behaviourIcon = 'strategy';
   } else if (savingsRate >= 5) {
     behaviourLabel = 'The Lifestyle Lover';
     behaviourDesc = "You live well — but there's room to grow your savings muscle.";
-    behaviourEmoji = '🌴';
+    behaviourIcon = 'shopping';
   } else {
     behaviourLabel = 'The Big Spender';
     behaviourDesc = "You enjoy the now — but your future self needs a little more love.";
-    behaviourEmoji = '💸';
+    behaviourIcon = 'debt';
   }
 
-  // Simulated blesser (who sent you the most)
+  
   const blessers = ['Mom', 'Dad', 'The Client', 'Your Side Hustle', 'Grandma'];
   const blesser = blessers[Math.floor(Math.random() * blessers.length)];
 
-  // Simulated top beneficiary (who you sent the most to)
+  
   const beneficiaries = ['Netflix & Co.', 'The Landlord', 'Your Car', 'Woolies', 'The Restaurant Industry'];
   const topBeneficiary = beneficiaries[Math.floor(Math.random() * beneficiaries.length)];
 
-  // Current month name
+  
   const month = new Date().toLocaleString('default', { month: 'long' }).toUpperCase();
   const year = new Date().getFullYear();
 
@@ -92,7 +93,7 @@ function generateWrappedData(userData) {
     topBeneficiary,
     behaviourLabel,
     behaviourDesc,
-    behaviourEmoji,
+    behaviourIcon,
     totalSpent: totalFlexibleExpenses + totalFixedExpenses,
     totalSaved: monthlySavings + monthlyInvestments,
   };
@@ -123,9 +124,7 @@ function WrappedCard({ number, frontLabel, backContent, delay }) {
   );
 }
 
-// ─────────────────────────────────────────────
-// MAIN BANKING WRAPPED PAGE
-// ─────────────────────────────────────────────
+
 export default function BankingWrapped() {
   const { userData, formatCurrency } = useUser();
   const [data, setData] = useState(null);
@@ -137,7 +136,7 @@ export default function BankingWrapped() {
     setData(generated);
   }, [userData]);
 
-  // Trigger behaviour card after a delay
+  
   useEffect(() => {
     const timer = setTimeout(() => setShowBehaviour(true), 1200);
     return () => clearTimeout(timer);
@@ -164,10 +163,10 @@ export default function BankingWrapped() {
       <div className="wrapped-teaser">
         <p>This month's recap includes:</p>
         <ul>
-          <li>📅 The week you spent the most</li>
-          <li>💰 The week you saved the most</li>
-          <li>🙌 Your blesser for the month</li>
-          <li>💳 Your top beneficiary</li>
+          <li><SymbolIcon name="spending" className="teaser-icon" size={18} /> The week you spent the most</li>
+          <li><SymbolIcon name="savings" className="teaser-icon" size={18} /> The week you saved the most</li>
+          <li><SymbolIcon name="profile" className="teaser-icon" size={18} /> Your blesser for the month</li>
+          <li><SymbolIcon name="wallet" className="teaser-icon" size={18} /> Your top beneficiary</li>
         </ul>
       </div>
 
@@ -179,7 +178,7 @@ export default function BankingWrapped() {
           delay={0.1}
           backContent={
             <div className="card-back-content">
-              <span className="card-back-emoji">📅</span>
+              <SymbolIcon name="spending" className="card-back-icon" size={24} />
               <span className="card-back-week">Week {data.biggestSpendWeek}</span>
               <span className="card-back-amount">{formatCurrency(data.biggestSpendAmount)}</span>
               <span className="card-back-label">spent this week</span>
@@ -193,7 +192,7 @@ export default function BankingWrapped() {
           delay={0.2}
           backContent={
             <div className="card-back-content">
-              <span className="card-back-emoji">💰</span>
+              <SymbolIcon name="savings" className="card-back-icon" size={24} />
               <span className="card-back-week">Week {data.bestSaveWeek}</span>
               <span className="card-back-amount">{formatCurrency(data.bestSaveAmount)}</span>
               <span className="card-back-label">saved this week</span>
@@ -207,7 +206,7 @@ export default function BankingWrapped() {
           delay={0.3}
           backContent={
             <div className="card-back-content">
-              <span className="card-back-emoji">🙌</span>
+              <SymbolIcon name="profile" className="card-back-icon" size={24} />
               <span className="card-back-week">{data.blesser}</span>
               <span className="card-back-label">sent you the most this month</span>
             </div>
@@ -220,7 +219,7 @@ export default function BankingWrapped() {
           delay={0.4}
           backContent={
             <div className="card-back-content">
-              <span className="card-back-emoji">💳</span>
+              <SymbolIcon name="wallet" className="card-back-icon" size={24} />
               <span className="card-back-week">{data.topBeneficiary}</span>
               <span className="card-back-label">received the most from you</span>
             </div>
@@ -239,7 +238,7 @@ export default function BankingWrapped() {
       {showBehaviour && (
         <div className="wrapped-behaviour-card">
           <p className="behaviour-eyebrow">Your financial identity this month</p>
-          <div className="behaviour-emoji">{data.behaviourEmoji}</div>
+          <SymbolIcon name={data.behaviourIcon} className="behaviour-icon" size={40} />
           <h2 className="behaviour-label">{data.behaviourLabel}</h2>
           <p className="behaviour-desc">{data.behaviourDesc}</p>
         </div>
@@ -259,7 +258,7 @@ export default function BankingWrapped() {
 
       {/* ── FOOTER ── */}
       <p className="wrapped-footer">
-        See you next month · ABSA NextGen Wealth Studio 💚
+        See you next month · ABSA NextGen Wealth Studio
       </p>
 
     </div>

@@ -2,23 +2,24 @@
 import { useState, useMemo } from 'react';
 import { useUser } from '../context/UserContext';
 import { useNavigate } from 'react-router-dom';
+import SymbolIcon from '../components/SymbolIcon';
 import '../styles/Studios.css';
 
 // Location cost estimates per month (rent + living costs)
 const LOCATIONS = [
-  { id: 'sandton', name: 'Sandton', baseCost: 18000, emoji: '🏙️' },
-  { id: 'rosebank', name: 'Rosebank', baseCost: 15000, emoji: '🌆' },
-  { id: 'midrand', name: 'Midrand', baseCost: 11000, emoji: '🏘️' },
-  { id: 'pretoria', name: 'Pretoria', baseCost: 9000, emoji: '🏛️' },
-  { id: 'ruimsig', name: 'Ruimsig', baseCost: 10000, emoji: '🌳' },
-  { id: 'soweto', name: 'Soweto', baseCost: 6000, emoji: '🏡' },
+  { id: 'sandton', name: 'Sandton', baseCost: 18000, icon: 'map' },
+  { id: 'rosebank', name: 'Rosebank', baseCost: 15000, icon: 'map' },
+  { id: 'midrand', name: 'Midrand', baseCost: 11000, icon: 'map' },
+  { id: 'pretoria', name: 'Pretoria', baseCost: 9000, icon: 'map' },
+  { id: 'ruimsig', name: 'Ruimsig', baseCost: 10000, icon: 'map' },
+  { id: 'soweto', name: 'Soweto', baseCost: 6000, icon: 'map' },
 ];
 
 // Lifestyle multipliers
 const LIFESTYLE_LEVELS = [
-  { id: 'minimal', label: 'Minimal', multiplier: 0.7, emoji: '🌱', desc: 'Basic needs, no frills' },
-  { id: 'comfortable', label: 'Comfortable', multiplier: 1.0, emoji: '😊', desc: 'Balanced lifestyle' },
-  { id: 'premium', label: 'Premium', multiplier: 1.5, emoji: '✨', desc: 'High-end living' },
+  { id: 'minimal', label: 'Minimal', multiplier: 0.7, icon: 'savings', desc: 'Basic needs, no frills' },
+  { id: 'comfortable', label: 'Comfortable', multiplier: 1.0, icon: 'wallet', desc: 'Balanced lifestyle' },
+  { id: 'premium', label: 'Premium', multiplier: 1.5, icon: 'growth', desc: 'High-end living' },
 ];
 
 function getStressLevel(leftover, netMonthly) {
@@ -66,7 +67,7 @@ function LifePathStudio() {
       </button>
 
       <div className="studio-header">
-        <div className="studio-header-icon">🗺️</div>
+        <SymbolIcon name="map" className="studio-header-icon" size={36} />
         <div>
           <h1>Life Path <span className="text-orange">Studio</span></h1>
           <p>Design your life according to your finances. Choose your location and lifestyle level to see the real impact.</p>
@@ -94,7 +95,7 @@ function LifePathStudio() {
                   className={`location-card ${selectedLocation === loc.id ? 'active' : ''}`}
                   onClick={() => setSelectedLocation(loc.id)}
                 >
-                  <div className="location-emoji">{loc.emoji}</div>
+                  <SymbolIcon name={loc.icon} className="location-icon" size={20} />
                   <div className="location-name">{loc.name}</div>
                   <div className="location-cost">{formatCurrency(loc.baseCost)}/mo</div>
                 </div>
@@ -112,7 +113,7 @@ function LifePathStudio() {
                   className={`lifestyle-option ${lifestyleLevel === level.id ? 'active' : ''}`}
                   onClick={() => setLifestyleLevel(level.id)}
                 >
-                  <div className="lifestyle-emoji">{level.emoji}</div>
+                  <SymbolIcon name={level.icon} className="lifestyle-icon" size={20} />
                   <div className="lifestyle-label">{level.label}</div>
                   <div className="lifestyle-desc">{level.desc}</div>
                 </div>
@@ -132,7 +133,7 @@ function LifePathStudio() {
         <div className="studio-results">
           {!hasSimulated ? (
             <div className="studio-results-placeholder">
-              <div className="studio-placeholder-icon">🗺️</div>
+              <SymbolIcon name="map" className="studio-placeholder-icon" size={36} />
               <div className="studio-placeholder-text">Choose your location and lifestyle, then hit Design My Life</div>
             </div>
           ) : (

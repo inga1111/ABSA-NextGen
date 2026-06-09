@@ -141,7 +141,17 @@
   margin-bottom: var(--spacing-sm);
 }
 
-.studio-icon { font-size: 2.2rem; }
+.studio-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--studio-colour);
+  flex-shrink: 0;
+}
 
 .studio-tag {
   font-size: 0.68rem;

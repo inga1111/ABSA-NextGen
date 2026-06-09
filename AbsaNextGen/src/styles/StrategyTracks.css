@@ -306,6 +306,96 @@
   margin-top: 7px;
 }
 
+.milestone-progress-strip {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: var(--spacing-lg);
+}
+
+.milestone-progress-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-lg);
+  text-align: center;
+}
+
+.milestone-progress-step .step-marker {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--step-color);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+}
+
+.milestone-progress-step.completed .step-marker {
+  box-shadow: 0 0 18px rgba(139, 92, 246, 0.4);
+}
+
+.step-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+
+.milestone-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: var(--spacing-sm);
+}
+
+.milestone-status-pill {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 6px 10px;
+  border-radius: var(--radius-full);
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.milestone-status-pill.not-started { background: #6b7280; }
+.milestone-status-pill.started { background: #3b82f6; }
+.milestone-status-pill.in-progress { background: #00c9b1; }
+.milestone-status-pill.completed { background: #8b5cf6; }
+
+.milestone-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: var(--spacing-md);
+}
+
+.milestone-action-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--text-secondary);
+  padding: 8px 12px;
+  font-size: 0.78rem;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.milestone-action-btn:hover {
+  border-color: rgba(255, 255, 255, 0.18);
+  color: white;
+}
+
+.milestone-action-btn.active {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
 /* ---------- RESPONSIVE ---------- */
 @media (max-width: 1024px) {
   .tracks-selector { grid-template-columns: 1fr; }

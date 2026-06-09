@@ -1,11 +1,9 @@
 import { useState, useRef, useEffect } from 'react';
 import { useUser } from '../context/UserContext';
+import SymbolIcon from '../components/SymbolIcon';
 import '../styles/ChatBot.css';
 
-// ─────────────────────────────────────────────
-// SUGGESTED QUESTIONS
-// These appear as quick-tap buttons
-// ─────────────────────────────────────────────
+
 const SUGGESTED = [
   'Am I saving enough?',
   'What is a TFSA?',
@@ -19,11 +17,6 @@ const SUGGESTED = [
   'What is a bond?',
 ];
 
-// ─────────────────────────────────────────────
-// RULE-BASED RESPONSE ENGINE
-// Takes the user's message + their financial
-// data and returns a personalised response
-// ─────────────────────────────────────────────
 function generateResponse(message, userData, formatCurrency) {
   const msg = message.toLowerCase();
   const {
@@ -88,11 +81,11 @@ return `Your current savings rate is ${savingsRate}%${name}. This means you're s
   // ── STRATEGY TRACK ──
   if (msg.includes('strategy') || msg.includes('track') || msg.includes('which track') || msg.includes('suits me')) {
     if (primaryGoal === 'property') {
-      return `Based on your profile${name}, you're on the Property Track 🏠. This means your focus is saving aggressively for a deposit (10–20% of property value) and improving your credit profile. Keep your lifestyle spending low and prioritise your deposit fund above all else.`;
+      return `Based on your profile${name}, you're on the Property Track. This means your focus is saving aggressively for a deposit (10–20% of property value) and improving your credit profile. Keep your lifestyle spending low and prioritise your deposit fund above all else.`;
     } else if (primaryGoal === 'growth') {
-      return `Based on your profile${name}, you're on the Aggressive Growth Track 💹. Your focus is maximising investments — TFSA, ETFs, unit trusts and offshore exposure. Make sure savings rate stays above 25% and avoid idle cash.`;
+      return `Based on your profile${name}, you're on the Aggressive Growth Track. Your focus is maximising investments — TFSA, ETFs, unit trusts and offshore exposure. Make sure savings rate stays above 25% and avoid idle cash.`;
     } else {
-      return `Based on your profile${name}, the Balanced Lifestyle Track ⚖️ suits you well. This means enjoying your lifestyle while steadily building wealth — saving 10–15%, contributing to a TFSA, and avoiding big unnecessary debt. It's the most sustainable path.`;
+      return `Based on your profile${name}, the Balanced Lifestyle Track suits you well. This means enjoying your lifestyle while steadily building wealth — saving 10–15%, contributing to a TFSA, and avoiding big unnecessary debt. It's the most sustainable path.`;
     }
   }
 
@@ -103,7 +96,7 @@ return `Your current savings rate is ${savingsRate}%${name}. This means you're s
 
   // ── CREDIT SCORE ──
   if (msg.includes('credit score') || msg.includes('credit')) {
-    return `Your credit score is crucial${name} — especially if you want to buy property! Here's how to improve it:\n\n✅ Pay all accounts on time, every time\n✅ Keep credit card balances below 30% of your limit\n✅ Don't apply for too many accounts at once\n✅ Pay more than the minimum on loans\n✅ Check your credit report regularly (TransUnion & Experian are free)\n\nA good score (650+) will get you better interest rates on a home loan — saving you hundreds of thousands over time.`;
+    return `Your credit score is crucial${name} — especially if you want to buy property! Here's how to improve it:\n\n• Pay all accounts on time, every time\n• Keep credit card balances below 30% of your limit\n• Don't apply for too many accounts at once\n• Pay more than the minimum on loans\n• Check your credit report regularly (TransUnion & Experian are free)\n\nA good score (650+) will get you better interest rates on a home loan — saving you hundreds of thousands over time.`;
   }
 
   // ── BOND ──
@@ -184,7 +177,7 @@ export default function ChatBot() {
 
       {/* ── HEADER ── */}
       <div className="chatbot-header">
-        <div className="chatbot-avatar">💬</div>
+        <div className="chatbot-avatar"><SymbolIcon name="chat" size={22} /></div>
         <div>
           <h2 className="chatbot-title">Financial Assistant</h2>
           <p className="chatbot-status">● Online · Powered by ABSA NextGen</p>
@@ -196,7 +189,7 @@ export default function ChatBot() {
         {messages.map((msg, i) => (
           <div key={i} className={`chat-bubble-wrapper ${msg.role}`}>
             {msg.role === 'bot' && (
-              <div className="bot-avatar">🤖</div>
+              <div className="bot-avatar"><SymbolIcon name="robot" size={16} /></div>
             )}
             <div className={`chat-bubble ${msg.role}`}>
               {msg.text.split('\n').map((line, j) => (
@@ -212,7 +205,7 @@ export default function ChatBot() {
         {/* Typing indicator */}
         {isTyping && (
           <div className="chat-bubble-wrapper bot">
-            <div className="bot-avatar">🤖</div>
+            <div className="bot-avatar"><SymbolIcon name="robot" size={16} /></div>
             <div className="chat-bubble bot typing-bubble">
               <span className="dot" />
               <span className="dot" />
@@ -252,7 +245,7 @@ export default function ChatBot() {
           onClick={() => sendMessage()}
           disabled={!input.trim()}
         >
-          ➤
+          <SymbolIcon name="send" size={18} />
         </button>
       </div>
 

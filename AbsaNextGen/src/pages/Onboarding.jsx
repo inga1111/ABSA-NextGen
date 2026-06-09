@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useUser } from '../context/UserContext';
+import SymbolIcon from '../components/SymbolIcon';
 import '../styles/Onboarding.css';
 
 
@@ -175,7 +176,10 @@ function Onboarding() {
               <h2>Income & Fixed Expenses</h2>
               <p>We'll calculate your take-home pay using South African PAYE tax brackets.</p>
 
-              <div className="form-section-label">💰 Monthly Income</div>
+              <div className="form-section-label">
+                <SymbolIcon name="wallet" className="section-icon" size={18} />
+                Monthly Income
+              </div>
               <div className="form-grid">
                 <div className="form-group full-width">
                   <label>Gross Monthly Salary (before tax)</label>
@@ -192,7 +196,10 @@ function Onboarding() {
                 </div>
               </div>
 
-              <div className="form-section-label">🏠 Fixed Monthly Expenses</div>
+              <div className="form-section-label">
+                <SymbolIcon name="home" className="section-icon" size={18} />
+                Fixed Monthly Expenses
+              </div>
               <div className="form-grid">
                 <div className="form-group">
                   <label>Rent / Bond Repayment</label>
@@ -273,7 +280,10 @@ function Onboarding() {
               <h2>Lifestyle & Debt</h2>
               <p>Be honest — this helps us give you accurate insights.</p>
 
-              <div className="form-section-label">🛍️ Monthly Lifestyle Expenses</div>
+              <div className="form-section-label">
+                <SymbolIcon name="shopping" className="section-icon" size={18} />
+                Monthly Lifestyle Expenses
+              </div>
               <div className="form-grid">
                 <div className="form-group">
                   <label>Groceries</label>
@@ -346,7 +356,10 @@ function Onboarding() {
                 </div>
               </div>
 
-              <div className="form-section-label">💳 Monthly Debt Payments</div>
+              <div className="form-section-label">
+                <SymbolIcon name="debt" className="section-icon" size={18} />
+                Monthly Debt Payments
+              </div>
               <div className="form-grid">
                 <div className="form-group">
                   <label>Student Loan</label>
@@ -399,7 +412,10 @@ function Onboarding() {
               <h2>Savings & Your Goal</h2>
               <p>Choose the financial path that best matches where you want to be in 5 years.</p>
 
-              <div className="form-section-label">💎 Monthly Savings & Investments</div>
+              <div className="form-section-label">
+                <SymbolIcon name="savings" className="section-icon" size={18} />
+                Monthly Savings & Investments
+              </div>
               <div className="form-grid">
                 <div className="form-group">
                   <label>Monthly Savings</label>
@@ -430,14 +446,17 @@ function Onboarding() {
                 </div>
               </div>
 
-              <div className="form-section-label">🎯 Your Primary Financial Goal</div>
+              <div className="form-section-label">
+                <SymbolIcon name="chart" className="section-icon" size={18} />
+                Your Primary Financial Goal
+              </div>
               <div className="goal-cards">
                 {/* Property Track */}
                 <div
                   className={`goal-card ${formData.primaryGoal === 'property' ? 'selected' : ''}`}
                   onClick={() => setFormData({ ...formData, primaryGoal: 'property' })}
                 >
-                  <div className="goal-icon">🏠</div>
+                  <SymbolIcon name="home" className="goal-icon" size={28} />
                   <div className="goal-title">Buy Property</div>
                   <div className="goal-desc">I want to own a home within 3–5 years</div>
                 </div>
@@ -447,7 +466,7 @@ function Onboarding() {
                   className={`goal-card ${formData.primaryGoal === 'balanced' ? 'selected' : ''}`}
                   onClick={() => setFormData({ ...formData, primaryGoal: 'balanced' })}
                 >
-                  <div className="goal-icon">⚖️</div>
+                  <SymbolIcon name="strategy" className="goal-icon" size={28} />
                   <div className="goal-title">Balanced Lifestyle</div>
                   <div className="goal-desc">I want to build wealth without sacrificing my lifestyle</div>
                 </div>
@@ -457,7 +476,7 @@ function Onboarding() {
                   className={`goal-card ${formData.primaryGoal === 'growth' ? 'selected' : ''}`}
                   onClick={() => setFormData({ ...formData, primaryGoal: 'growth' })}
                 >
-                  <div className="goal-icon">📈</div>
+                  <SymbolIcon name="growth" className="goal-icon" size={28} />
                   <div className="goal-title">Aggressive Growth</div>
                   <div className="goal-desc">I want to maximise investments and build long-term wealth</div>
                 </div>

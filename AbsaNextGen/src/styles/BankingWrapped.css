@@ -81,6 +81,41 @@
 .wrapped-teaser li {
   font-size: 0.95rem;
   color: #ddd;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.teaser-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  color: #5cb85c;
+}
+
+.card-back-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: rgba(92, 184, 92, 0.12);
+  color: #5cb85c;
+}
+
+.behaviour-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 12px;
+  border-radius: 18px;
+  background: rgba(92, 184, 92, 0.12);
+  color: #5cb85c;
 }
 
 /* ── CARDS GRID ── */

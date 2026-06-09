@@ -2,13 +2,14 @@
 
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '../context/UserContext';
+import SymbolIcon from '../components/SymbolIcon';
 import '../styles/SimulationLab.css';
 
 const STUDIOS = [
   {
     id: 'lifestyle',
     path: '/simulation-lab/lifestyle-studio',
-    icon: '🚗',
+    icon: 'shopping',
     title: 'Lifestyle Studio',
     subtitle: 'Spend vs Invest',
     description: 'Compare the financial impact of lifestyle choices like a car purchase against investing that money instead. Discover your financial identity.',
@@ -18,7 +19,7 @@ const STUDIOS = [
   {
     id: 'lifepath',
     path: '/simulation-lab/life-path-studio',
-    icon: '🗺️',
+    icon: 'map',
     title: 'Life Path Studio',
     subtitle: 'Lifestyle Cost Simulation',
     description: 'Design your life according to your finances. Choose where you want to live and your lifestyle level to see the real financial impact.',
@@ -28,7 +29,7 @@ const STUDIOS = [
   {
     id: 'futurewealth',
     path: '/simulation-lab/future-wealth-studio',
-    icon: '🔮',
+    icon: 'growth',
     title: 'Future Wealth Studio',
     subtitle: 'Savings and Investment Growth',
     description: 'See your life five years from now. Project your net worth, savings and milestones based on your current financial habits.',
@@ -76,7 +77,7 @@ function SimulationLab() {
             onClick={() => navigate(studio.path)}
           >
             <div className="studio-card-top">
-              <div className="studio-icon">{studio.icon}</div>
+              <SymbolIcon name={studio.icon} className="studio-icon" size={30} />
               <div className="studio-tag">{studio.tag}</div>
             </div>
 
