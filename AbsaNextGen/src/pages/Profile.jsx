@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useUser } from '../context/UserContext';
+import SymbolIcon from '../components/SymbolIcon';
 import '../styles/Profile.css';
 
 
@@ -37,8 +38,7 @@ export default function Profile() {
   const [editing, setEditing] = useState(false);
   const [saved, setSaved] = useState(false);
 
-  
-  const [form, setForm] = useState({ ...userData });
+  const [form, setForm] = useState(() => ({ ...userData }));
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -64,32 +64,27 @@ export default function Profile() {
 
   return (
     <div className="profile-page">
-
-      {/* ── HEADER ── */}
-      <div className="profile-header">
-        <div className="profile-avatar">
-          {userData.firstName ? userData.firstName[0].toUpperCase() : '?'}
-        </div>
-        <div className="profile-header-info">
-          <h1 className="profile-name">
-            {userData.firstName || 'Your'} {userData.lastName || 'Profile'}
-          </h1>
-          <p className="profile-occupation">{userData.occupation || 'NextGen Wealth Member'}</p>
-          <span className={`profile-health-badge ${healthColour}`}>
-            {userData.healthLabel || 'No Data'}
-          </span>
+      <div className="profile-page-header">
+        <div className="profile-title-wrap">
+          <SymbolIcon name="profile" size={26} className="page-icon" />
+          <div>
+            <h1 className="profile-page-title">Profile</h1>
+            <p className="profile-page-subtitle">Review and adjust your personal details, financial health, and expense profile.</p>
+          </div>
         </div>
         {!editing && (
           <button className="edit-btn" onClick={() => setEditing(true)}>
-            ✏️ Edit Profile
+             Edit Profile
           </button>
         )}
       </div>
 
-      {/* ── SAVE CONFIRMATION ── */}
+    
+
+      {/* ── FINANCIAL OVERVIEW CARDS ---- */}
       {saved && (
         <div className="save-toast">
-          ✅ Profile updated successfully!
+          Profile updated successfully!
         </div>
       )}
 
@@ -133,7 +128,10 @@ export default function Profile() {
 
           {/* Personal Info */}
           <div className="profile-section">
-            <h3 className="section-title">👤 Personal Info</h3>
+            <div className="section-heading">
+              <SymbolIcon name="profile" size={18} className="section-icon" />
+              <h3 className="section-title">Personal Info</h3>
+            </div>
             <div className="info-grid">
               <div className="info-row">
                 <span className="info-label">First Name</span>
@@ -156,7 +154,10 @@ export default function Profile() {
 
           {/* Fixed Expenses */}
           <div className="profile-section">
-            <h3 className="section-title">🏠 Fixed Expenses</h3>
+            <div className="section-heading">
+              <SymbolIcon name="home" size={18} className="section-icon" />
+              <h3 className="section-title">Fixed Expenses</h3>
+            </div>
             <div className="info-grid">
               <div className="info-row">
                 <span className="info-label">Rent</span>
@@ -179,7 +180,10 @@ export default function Profile() {
 
           {/* Lifestyle Expenses */}
           <div className="profile-section">
-            <h3 className="section-title">🌴 Lifestyle Expenses</h3>
+            <div className="section-heading">
+              <SymbolIcon name="shopping" size={18} className="section-icon" />
+              <h3 className="section-title">Lifestyle Expenses</h3>
+            </div>
             <div className="info-grid">
               <div className="info-row">
                 <span className="info-label">Groceries</span>
@@ -202,7 +206,10 @@ export default function Profile() {
 
           {/* Savings & Investments */}
           <div className="profile-section">
-            <h3 className="section-title">💹 Savings & Investments</h3>
+            <div className="section-heading">
+              <SymbolIcon name="savings" size={18} className="section-icon" />
+              <h3 className="section-title">Savings & Investments</h3>
+            </div>
             <div className="info-grid">
               <div className="info-row">
                 <span className="info-label">Monthly Savings</span>
@@ -229,7 +236,7 @@ export default function Profile() {
       {/* ── EDIT MODE ── */}
       {editing && (
         <div className="edit-form">
-          <h3 className="section-title">✏️ Edit Your Information</h3>
+          <h3 className="section-title">Edit Your Information</h3>
           <p className="edit-hint">
             Update any field below. Your financial health score and insights will recalculate automatically.
           </p>

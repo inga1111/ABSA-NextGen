@@ -1,7 +1,7 @@
 /* ── PAGE WRAPPER ── */
 .wrapped-page {
   min-height: 100vh;
-  background: linear-gradient(135deg, #0a0a0a 0%, #0d1f0d 40%, #0a0a1a 100%);
+  background: transparent;
   color: white;
   padding: 40px 32px 80px;
   max-width: 860px;
@@ -15,6 +15,20 @@
   text-align: center;
   margin-bottom: 40px;
   padding: 48px 24px 32px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 28px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(18px);
+  overflow: hidden;
+}
+
+.wrapped-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.06), transparent 70%);
+  pointer-events: none;
 }
 
 .wrapped-header-glow {
@@ -29,6 +43,8 @@
 }
 
 .wrapped-eyebrow {
+  position: relative;
+  z-index: 1;
   font-size: 0.72rem;
   letter-spacing: 3px;
   color: #5cb85c;
@@ -37,10 +53,28 @@
 }
 
 .wrapped-title {
+  position: relative;
+  z-index: 1;
   font-size: 2.2rem;
   font-weight: 900;
   line-height: 1.2;
   margin-bottom: 12px;
+  animation: titleLanding 0.9s ease-out both;
+}
+
+@keyframes titleLanding {
+  0% {
+    transform: rotateX(20deg) scale(0.96);
+    opacity: 0;
+  }
+  60% {
+    transform: rotateX(-8deg) scale(1.03);
+    opacity: 1;
+  }
+  100% {
+    transform: rotateX(0deg) scale(1);
+    opacity: 1;
+  }
 }
 
 .wrapped-month {

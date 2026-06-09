@@ -1,3 +1,4 @@
+import { useState, useEffect, useRef } from 'react';
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 import { useUser } from '../context/UserContext';
 import { useNavigate } from 'react-router-dom';
@@ -46,7 +47,101 @@ function Dashboard() {
     otherFixed,
   } = userData;
 
- 
+  const [animatedValues, setAnimatedValues] = useState({
+    netMonthly: 0,
+    grossMonthly: 0,
+    monthlyTax: 0,
+    uifMonthly: 0,
+    leftover: 0,
+    totalFixedExpenses: 0,
+    totalFlexibleExpenses: 0,
+    monthlySavings: 0,
+    monthlyInvestments: 0,
+    spendingPercent: 0,
+    savingsRate: 0,
+    expenseRatio: 0,
+    healthScore: 0,
+  });
+
+  const animationRef = useRef(null);
+
+  const totalSpending = totalFixedExpenses + totalFlexibleExpenses;
+
+  const spendingPercent = netMonthly > 0
+    ? Math.round((totalSpending / netMonthly) * 100)
+    : 0;
+
+  const leftover = netMonthly - totalSpending - monthlySavings - monthlyInvestments - totalDebt;
+
+  useEffect(() => {
+    const targets = {
+      netMonthly,
+      grossMonthly,
+      monthlyTax,
+      uifMonthly,
+      leftover,
+      totalFixedExpenses,
+      totalFlexibleExpenses,
+      monthlySavings,
+      monthlyInvestments,
+      spendingPercent,
+      savingsRate,
+      expenseRatio,
+      healthScore,
+    };
+
+    const startValues = {
+      netMonthly: 0,
+      grossMonthly: 0,
+      monthlyTax: 0,
+      uifMonthly: 0,
+      leftover: 0,
+      totalFixedExpenses: 0,
+      totalFlexibleExpenses: 0,
+      monthlySavings: 0,
+      monthlyInvestments: 0,
+      spendingPercent: 0,
+      savingsRate: 0,
+      expenseRatio: 0,
+      healthScore: 0,
+    };
+
+    const duration = 1200;
+    const easeOut = (t) => 1 - Math.pow(1 - t, 3);
+
+    const animate = (timestamp) => {
+      if (!animationRef.current?.startTime) {
+        animationRef.current = { startTime: timestamp };
+      }
+      const elapsed = timestamp - animationRef.current.startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = easeOut(progress);
+
+      const nextValues = {};
+      Object.entries(targets).forEach(([key, target]) => {
+        const start = startValues[key] || 0;
+        nextValues[key] = Math.round(start + (target - start) * eased);
+      });
+
+      setAnimatedValues(nextValues);
+
+      if (progress < 1) {
+        animationRef.current.frame = requestAnimationFrame(animate);
+      }
+    };
+
+    if (animationRef.current?.frame) {
+      cancelAnimationFrame(animationRef.current.frame);
+    }
+    animationRef.current = { startTime: null, frame: requestAnimationFrame(animate) };
+
+    return () => {
+      if (animationRef.current?.frame) {
+        cancelAnimationFrame(animationRef.current.frame);
+      }
+    };
+  }, [netMonthly, grossMonthly, monthlyTax, uifMonthly, leftover, totalFixedExpenses, totalFlexibleExpenses, monthlySavings, monthlyInvestments, spendingPercent, savingsRate, expenseRatio, healthScore]);
+
   const pieData = [
     { name: 'Rent / Bond', value: Number(rent) || 0 },
     { name: 'Car Payment', value: Number(carPayment) || 0 },
@@ -56,19 +151,6 @@ function Dashboard() {
     { name: 'Investments', value: Number(monthlyInvestments) || 0 },
     { name: 'Other', value: Number(otherFixed) || 0 },
   ].filter(item => item.value > 0);
-
-  // -----------------------------------------------
-  // Spending percentage of net income
-  // -----------------------------------------------
-  const totalSpending = totalFixedExpenses + totalFlexibleExpenses;
-  const spendingPercent = netMonthly > 0
-    ? Math.round((totalSpending / netMonthly) * 100)
-    : 0;
-
-  // -----------------------------------------------
-  // Leftover money after all expenses
-  // -----------------------------------------------
-  const leftover = netMonthly - totalSpending - monthlySavings - monthlyInvestments - totalDebt;
 
   // -----------------------------------------------
   // Health status colour mapping
@@ -120,19 +202,19 @@ function Dashboard() {
         <div className="dashboard-card income-card">
           <div className="card-label">Monthly Take-Home Salary</div>
           <div className="card-subtitle">This is how much you have after tax deductions</div>
-          <div className="income-amount">{formatCurrency(netMonthly)}</div>
+          <div className="income-amount">{formatCurrency(animatedValues.netMonthly)}</div>
           <div className="income-breakdown">
             <div className="income-breakdown-item">
               <span>Gross Income</span>
-              <span>{formatCurrency(grossMonthly)}</span>
+              <span>{formatCurrency(animatedValues.grossMonthly)}</span>
             </div>
             <div className="income-breakdown-item deduction">
               <span>Tax (PAYE)</span>
-              <span>- {formatCurrency(monthlyTax)}</span>
+              <span>- {formatCurrency(animatedValues.monthlyTax)}</span>
             </div>
             <div className="income-breakdown-item deduction">
               <span>UIF</span>
-              <span>- {formatCurrency(uifMonthly)}</span>
+              <span>- {formatCurrency(animatedValues.uifMonthly)}</span>
             </div>
             <div className="income-breakdown-divider" />
             <div className="income-breakdown-item highlight">
@@ -158,12 +240,12 @@ function Dashboard() {
               <div
                 className="health-bar-fill"
                 style={{
-                  width: `${healthScore}%`,
+                  width: `${animatedValues.healthScore}%`,
                   background: healthColour,
                 }}
               />
             </div>
-            <span className="health-score-text">{healthScore}/100</span>
+            <span className="health-score-text">{animatedValues.healthScore}/100</span>
           </div>
 
           {/* Health breakdown stats */}
@@ -174,7 +256,7 @@ function Dashboard() {
                 className="health-stat-value"
                 style={{ color: (savingsRate || 0) >= 20 ? '#2ECC71' : (savingsRate || 0) >= 10 ? '#F4D03F' : '#E74C3C' }}
               >
-                {savingsRate || 0}%
+                {animatedValues.savingsRate}%
               </span>
             </div>
             <div className="health-stat">
@@ -183,7 +265,7 @@ function Dashboard() {
                 className="health-stat-value"
                 style={{ color: (expenseRatio || 0) <= 70 ? '#2ECC71' : (expenseRatio || 0) <= 80 ? '#F4D03F' : '#E74C3C' }}
               >
-                {expenseRatio || 0}%
+                {animatedValues.expenseRatio}%
               </span>
             </div>
             <div className="health-stat">
@@ -192,7 +274,7 @@ function Dashboard() {
                 className="health-stat-value"
                 style={{ color: healthColour }}
               >
-                {healthScore}/100
+                {animatedValues.healthScore}/100
               </span>
             </div>
           </div>
@@ -208,7 +290,7 @@ function Dashboard() {
           <div className="card-label">Where Your Money Goes</div>
           <div className="chart-spending-note">
             You are spending{' '}
-            <span className="text-orange">{spendingPercent}% of your income</span>
+            <span className="text-orange">{animatedValues.spendingPercent}% of your income</span>
           </div>
 
           {pieData.length > 0 ? (
@@ -259,7 +341,7 @@ function Dashboard() {
             <div className="insight-content">
               <div className="insight-title">Spending</div>
               <div className="insight-message">
-                You are spending <strong>{spendingPercent}%</strong> of your income
+                You are spending <strong>{animatedValues.spendingPercent}%</strong> of your income
               </div>
             </div>
           </div>
@@ -270,7 +352,7 @@ function Dashboard() {
             <div className="insight-content">
               <div className="insight-title">Savings Rate</div>
               <div className="insight-message">
-                Your savings rate is currently at <strong>{savingsRate || 0}%</strong>
+                Your savings rate is currently at <strong>{animatedValues.savingsRate}%</strong>
                 {(savingsRate || 0) < 20 ? ' (below recommended level)' : ' (great work!)'}
               </div>
             </div>
@@ -282,7 +364,7 @@ function Dashboard() {
             <div className="insight-content">
               <div className="insight-title">Monthly Leftover</div>
               <div className="insight-message">
-                You have <strong>{formatCurrency(leftover > 0 ? leftover : 0)}</strong> unallocated this month
+                You have <strong>{formatCurrency(animatedValues.leftover > 0 ? animatedValues.leftover : 0)}</strong> unallocated this month
               </div>
             </div>
           </div>
@@ -314,28 +396,28 @@ function Dashboard() {
         <div className="summary-stat-card">
           <SymbolIcon name="home" className="summary-stat-icon" />
           <div className="summary-stat-label">Fixed Expenses</div>
-          <div className="summary-stat-value">{formatCurrency(totalFixedExpenses)}</div>
+          <div className="summary-stat-value">{formatCurrency(animatedValues.totalFixedExpenses)}</div>
           <div className="summary-stat-sub">per month</div>
         </div>
 
         <div className="summary-stat-card">
           <SymbolIcon name="shopping" className="summary-stat-icon" />
           <div className="summary-stat-label">Lifestyle Expenses</div>
-          <div className="summary-stat-value">{formatCurrency(totalFlexibleExpenses)}</div>
+          <div className="summary-stat-value">{formatCurrency(animatedValues.totalFlexibleExpenses)}</div>
           <div className="summary-stat-sub">per month</div>
         </div>
 
         <div className="summary-stat-card">
           <SymbolIcon name="savings" className="summary-stat-icon" />
           <div className="summary-stat-label">Savings</div>
-          <div className="summary-stat-value">{formatCurrency(monthlySavings)}</div>
+          <div className="summary-stat-value">{formatCurrency(animatedValues.monthlySavings)}</div>
           <div className="summary-stat-sub">per month</div>
         </div>
 
         <div className="summary-stat-card">
           <SymbolIcon name="growth" className="summary-stat-icon" />
           <div className="summary-stat-label">Investments</div>
-          <div className="summary-stat-value">{formatCurrency(monthlyInvestments)}</div>
+          <div className="summary-stat-value">{formatCurrency(animatedValues.monthlyInvestments)}</div>
           <div className="summary-stat-sub">per month</div>
         </div>
       </div>

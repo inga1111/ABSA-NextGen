@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useUser } from '../context/UserContext';
+import SymbolIcon from '../components/SymbolIcon';
 import '../styles/Settings.css';
 
 function Toggle({ label, description, value, onChange }) {
@@ -21,10 +22,13 @@ function Toggle({ label, description, value, onChange }) {
 }
 
 
-function SettingsSection({ title, icon, children }) {
+function SettingsSection({ title, iconName, children }) {
   return (
     <div className="settings-section">
-      <h3 className="settings-section-title">{icon} {title}</h3>
+      <div className="settings-section-heading">
+        <SymbolIcon name={iconName} size={18} className="section-icon" />
+        <h3 className="settings-section-title">{title}</h3>
+      </div>
       <div className="settings-section-body">{children}</div>
     </div>
   );
@@ -74,9 +78,9 @@ export default function Settings() {
     setPrivacy((prev) => ({ ...prev, [key]: val }));
 
   const tracks = [
-    { id: 'property', label: '🏠 Property Track', desc: 'Save for a home deposit in 3–5 years' },
-    { id: 'balanced', label: '⚖️ Balanced Track', desc: 'Build wealth while enjoying life' },
-    { id: 'growth', label: '💹 Growth Track', desc: 'Maximise investments aggressively' },
+    { id: 'property', label: 'Property Track', desc: 'Save for a home deposit in 3–5 years' },
+    { id: 'balanced', label: 'Balanced Track', desc: 'Build wealth while enjoying life' },
+    { id: 'growth', label: 'Growth Track', desc: 'Maximise investments aggressively' },
   ];
 
   return (
@@ -84,7 +88,10 @@ export default function Settings() {
 
       {/* ── HEADER ── */}
       <div className="settings-header">
-        <h1 className="settings-title">⚙️ Settings</h1>
+        <div className="settings-title-wrap">
+          <SymbolIcon name="settings" size={24} className="page-icon" />
+          <h1 className="settings-title">Settings</h1>
+        </div>
         <p className="settings-subtitle">
           Manage your preferences and personalise your experience.
         </p>
@@ -112,7 +119,7 @@ export default function Settings() {
       </div>
 
       {/* ── STRATEGY TRACK SELECTOR ── */}
-      <SettingsSection title="Strategy Track" icon="🎯">
+      <SettingsSection title="Strategy Track" iconName="strategy">
         <p className="settings-track-hint">
           Your selected track shapes your milestones, nudges and recommendations.
         </p>
@@ -123,7 +130,10 @@ export default function Settings() {
               className={`track-option ${selectedTrack === track.id ? 'active' : ''}`}
               onClick={() => setSelectedTrack(track.id)}
             >
-              <span className="track-option-label">{track.label}</span>
+              <div className="track-option-head">
+                <SymbolIcon name={track.id === 'property' ? 'home' : track.id === 'balanced' ? 'strategy' : 'growth'} size={18} className="track-option-icon" />
+                <span className="track-option-label">{track.label}</span>
+              </div>
               <span className="track-option-desc">{track.desc}</span>
               {selectedTrack === track.id && (
                 <span className="track-checkmark">✓</span>
@@ -134,7 +144,7 @@ export default function Settings() {
       </SettingsSection>
 
       {/* ── NOTIFICATIONS ── */}
-      <SettingsSection title="Notifications" icon="🔔">
+      <SettingsSection title="Notifications" iconName="alert">
         <Toggle
           label="Overspending Alerts"
           description="Get nudged when spending exceeds your targets"
@@ -168,7 +178,7 @@ export default function Settings() {
       </SettingsSection>
 
       {/* ── DISPLAY ── */}
-      <SettingsSection title="Display" icon="🎨">
+      <SettingsSection title="Display" iconName="chart">
         <Toggle
           label="Dark Mode"
           description="Keep the dark aesthetic across all pages"
@@ -196,7 +206,7 @@ export default function Settings() {
       </SettingsSection>
 
       {/* ── PRIVACY ── */}
-      <SettingsSection title="Privacy" icon="🔒">
+      <SettingsSection title="Privacy" iconName="check">
         <Toggle
           label="Share Anonymous Data"
           description="Help improve ABSA NextGen with anonymised usage data"
@@ -212,7 +222,7 @@ export default function Settings() {
       </SettingsSection>
 
       {/* ── ABOUT ── */}
-      <SettingsSection title="About" icon="ℹ️">
+      <SettingsSection title="About" iconName="dashboard">
         <div className="about-row">
           <span className="about-label">App</span>
           <span className="about-value">ABSA NextGen Wealth Studio</span>

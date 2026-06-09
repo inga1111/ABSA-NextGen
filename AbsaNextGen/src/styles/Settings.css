@@ -1,28 +1,47 @@
 /* ── PAGE ── */
 .settings-page {
   min-height: 100vh;
-  background: linear-gradient(135deg, #0a0a0a 0%, #0d1a0d 60%, #0a0a1a 100%);
   color: white;
-  padding: 40px 32px 80px;
-  max-width: 760px;
+  padding: var(--spacing-xl);
+  max-width: 980px;
   margin: 0 auto;
-  font-family: 'Arial', sans-serif;
+  font-family: 'Inter', Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
 }
 
 /* ── HEADER ── */
 .settings-header {
-  margin-bottom: 32px;
+  margin-bottom: 24px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-xl);
+  padding: 24px 28px;
+  box-shadow: var(--shadow-sm);
+}
+
+.settings-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.page-icon {
+  color: var(--text-primary);
 }
 
 .settings-title {
-  font-size: 1.9rem;
+  font-size: 1.85rem;
   font-weight: 800;
-  margin: 0 0 8px;
+  margin: 0;
+  color: var(--text-primary);
 }
 
 .settings-subtitle {
-  font-size: 0.9rem;
-  color: #aaa;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
   margin: 0;
 }
 
@@ -105,13 +124,24 @@
   margin-bottom: 20px;
 }
 
+.settings-section-heading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
 .settings-section-title {
   font-size: 0.95rem;
   font-weight: 700;
-  color: #5cb85c;
-  margin: 0 0 18px;
+  color: var(--text-primary);
+  margin: 0;
   text-transform: uppercase;
   letter-spacing: 1px;
+}
+
+.section-icon {
+  color: var(--text-primary);
 }
 
 .settings-section-body {
@@ -203,27 +233,37 @@
 }
 
 .track-option {
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 14px;
-  padding: 14px 18px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  padding: 16px 20px;
   cursor: pointer;
   text-align: left;
   position: relative;
   transition: all 0.2s ease;
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 6px;
 }
 
 .track-option:hover {
-  border-color: rgba(92,184,92,0.3);
-  background: rgba(92,184,92,0.05);
+  border-color: var(--glass-border-hover);
+  background: var(--glass-bg-hover);
 }
 
 .track-option.active {
-  border-color: rgba(92,184,92,0.5);
-  background: rgba(92,184,92,0.08);
+  border-color: rgba(232, 73, 15, 0.5);
+  background: rgba(232, 73, 15, 0.08);
+}
+
+.track-option-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.track-option-icon {
+  color: #f8f8f8;
 }
 
 .track-option-label {
