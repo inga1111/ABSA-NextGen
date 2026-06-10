@@ -393,9 +393,24 @@
   transform: translateY(-1px);
 }
 
-.btn-submit:disabled {
-  opacity: 0.35;
+.btn-submit:disabled,
+.btn-next:disabled {
+  opacity: 0.5;
   cursor: not-allowed;
+  animation: disabledPulse 1.6s ease-in-out infinite;
+  background: rgba(196, 20, 20, 0.65);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+@keyframes disabledPulse {
+  0%, 100% {
+    transform: translateY(0);
+    box-shadow: 0 0 0 rgba(232, 73, 15, 0.12);
+  }
+  50% {
+    transform: translateY(-2px);
+    box-shadow: 0 0 18px rgba(232, 73, 15, 0.22);
+  }
 }
 
 /* ---------- RESPONSIVE ---------- */

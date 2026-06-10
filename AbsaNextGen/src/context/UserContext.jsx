@@ -1,5 +1,5 @@
 
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState, useEffect } from 'react';
 
 const UserContext = createContext(null);
 
@@ -190,10 +190,38 @@ const defaultUserData = {
 // Wrap this around the whole app in App.jsx
 // so every page can read and update user data
 // -----------------------------------------------
+const USER_STORAGE_KEY = 'absaNextGenUserData';
+const ONBOARDED_STORAGE_KEY = 'absaNextGenHasOnboarded';
+const TRACK_STORAGE_KEY = 'absaNextGenSelectedTrack';
+
 export function UserProvider({ children }) {
-  const [userData, setUserData] = useState(defaultUserData);
-  const [hasOnboarded, setHasOnboarded] = useState(false);
-  const [selectedTrack, setSelectedTrack] = useState(null); // 'property', 'balanced', 'growth'
+  const [userData, setUserData] = useState(() => {
+    if (typeof window === 'undefined') return defaultUserData;
+    try {
+      const stored = window.localStorage.getItem(USER_STORAGE_KEY);
+      return stored ? JSON.parse(stored) : defaultUserData;
+    } catch {
+      return defaultUserData;
+    }
+  });
+
+  const [hasOnboarded, setHasOnboarded] = useState(() => {
+    if (typeof window === 'undefined') return false;
+    try {
+      return window.localStorage.getItem(ONBOARDED_STORAGE_KEY) === 'true';
+    } catch {
+      return false;
+    }
+  });
+
+  const [selectedTrack, setSelectedTrack] = useState(() => {
+    if (typeof window === 'undefined') return null;
+    try {
+      return window.localStorage.getItem(TRACK_STORAGE_KEY) || null;
+    } catch {
+      return null;
+    }
+  });
 
   // -----------------------------------------------
   // Called when the user completes the onboarding form
@@ -298,6 +326,36 @@ export function UserProvider({ children }) {
     setUserData(merged);
   };
 
+  const logout = () => {
+    setUserData(defaultUserData);
+    setHasOnboarded(false);
+    setSelectedTrack(null);
+    if (typeof window !== 'undefined') {
+      try {
+        window.localStorage.removeItem(USER_STORAGE_KEY);
+        window.localStorage.removeItem(ONBOARDED_STORAGE_KEY);
+        window.localStorage.removeItem(TRACK_STORAGE_KEY);
+      } catch {
+        // ignore localStorage failures
+      }
+    }
+  };
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    try {
+      window.localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(userData));
+      window.localStorage.setItem(ONBOARDED_STORAGE_KEY, hasOnboarded ? 'true' : 'false');
+      if (selectedTrack) {
+        window.localStorage.setItem(TRACK_STORAGE_KEY, selectedTrack);
+      } else {
+        window.localStorage.removeItem(TRACK_STORAGE_KEY);
+      }
+    } catch {
+      // ignore localStorage failures
+    }
+  }, [userData, hasOnboarded, selectedTrack]);
+
   return (
     <UserContext.Provider
       value={{
@@ -307,6 +365,7 @@ export function UserProvider({ children }) {
         setSelectedTrack,
         completeOnboarding,
         updateUserData,
+        logout,
         formatCurrency,
       }}
     >

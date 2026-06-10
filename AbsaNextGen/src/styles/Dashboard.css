@@ -83,31 +83,6 @@
   box-shadow: var(--shadow-md);
 }
 
-/* Glow effect at bottom of each card */
-.income-card::after {
-  content: '';
-  position: absolute;
-  bottom: -10px;
-  left: 15%;
-  right: 15%;
-  height: 80px;
-  background: radial-gradient(ellipse, rgba(232, 73, 15, 0.25) 0%, transparent 70%);
-  filter: blur(16px);
-  pointer-events: none;
-}
-
-.health-card::after {
-  content: '';
-  position: absolute;
-  bottom: -10px;
-  left: 15%;
-  right: 15%;
-  height: 80px;
-  background: radial-gradient(ellipse, rgba(107, 159, 255, 0.2) 0%, transparent 70%);
-  filter: blur(16px);
-  pointer-events: none;
-}
-
 .card-label {
   font-size: 0.72rem;
   font-weight: 700;
@@ -233,18 +208,6 @@
 /* ---------- PIE CHART CARD ---------- */
 .chart-card {
   min-height: 360px;
-}
-
-.chart-card::after {
-  content: '';
-  position: absolute;
-  bottom: -10px;
-  left: 20%;
-  right: 20%;
-  height: 80px;
-  background: radial-gradient(ellipse, rgba(168, 85, 247, 0.2) 0%, transparent 70%);
-  filter: blur(16px);
-  pointer-events: none;
 }
 
 .chart-spending-note {

@@ -8,8 +8,6 @@ function Landing({ initialMode = 'signup' }) {
   const navigate = useNavigate();
   const [mode, setMode] = useState(initialMode);
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
     email: '',
     password: '',
   });
@@ -76,41 +74,7 @@ function Landing({ initialMode = 'signup' }) {
             </div>
           </div>
 
-          {mode === 'signup' && (
-            <div className="auth-social">
-              <button type="button" className="auth-social-btn google">
-                <span>Google</span>
-              </button>
-            </div>
-          )}
-
-          <div className="auth-divider"><span>Or</span></div>
-
           <form className="auth-form" onSubmit={handleSubmit}>
-            {mode === 'signup' && (
-              <div className="field-row">
-                <label>
-                  First Name
-                  <input
-                    type="text"
-                    name="firstName"
-                    value={formData.firstName}
-                    onChange={handleChange}
-                    placeholder="eg. Asakhe"
-                  />
-                </label>
-                <label>
-                  Last Name
-                  <input
-                    type="text"
-                    name="lastName"
-                    value={formData.lastName}
-                    onChange={handleChange}
-                    placeholder="eg. Khumalo"
-                  />
-                </label>
-              </div>
-            )}
 
             <label>
               Email

@@ -193,7 +193,7 @@
 }
 
 .toggle-switch.on {
-  background: #3a9a3a;
+  background: linear-gradient(135deg, #de0000, #e8490f);
 }
 
 .toggle-switch.off {
@@ -318,7 +318,7 @@
 }
 
 .settings-save-btn {
-  background: linear-gradient(135deg, #2a7a2a, #3a9a3a);
+  background: linear-gradient(135deg, #de0000, #e8490f);
   border: none;
   color: white;
   padding: 13px 32px;
@@ -330,7 +330,7 @@
 }
 
 .settings-save-btn:hover {
-  background: linear-gradient(135deg, #3a9a3a, #4ab84a);
+  background: linear-gradient(135deg, #e8490f, #c00000);
   transform: translateY(-2px);
 }
 

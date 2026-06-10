@@ -15,7 +15,13 @@ function Onboarding() {
   const { completeOnboarding } = useUser();
   const [currentStep, setCurrentStep] = useState(0);
 
-  // All form data lives here in one object
+  const STEP_REQUIRED_FIELDS = [
+    ['firstName', 'lastName', 'age', 'occupation'],
+    ['grossMonthly', 'rent', 'carPayment', 'insurance', 'medicalAid', 'otherFixed'],
+    ['groceries', 'dining', 'subscriptions', 'travel', 'otherFlexible', 'studentLoan', 'creditCard', 'otherDebt'],
+    ['monthlySavings', 'monthlyInvestments', 'primaryGoal'],
+  ];
+
   const [formData, setFormData] = useState({
     // Step 1
     firstName: '',
@@ -52,8 +58,17 @@ function Onboarding() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const isStepComplete = (stepIndex) => {
+    return STEP_REQUIRED_FIELDS[stepIndex].every((field) => {
+      const value = formData[field];
+      return value !== '' && value !== null && value !== undefined;
+    });
+  };
+
   const handleNext = () => {
-    if (currentStep < STEPS.length - 1) setCurrentStep(currentStep + 1);
+    if (currentStep < STEPS.length - 1 && isStepComplete(currentStep)) {
+      setCurrentStep(currentStep + 1);
+    }
   };
 
   const handleBack = () => {
@@ -493,14 +508,18 @@ function Onboarding() {
             )}
 
             {currentStep < STEPS.length - 1 ? (
-              <button className="btn-next" onClick={handleNext}>
+              <button
+                className="btn-next"
+                onClick={handleNext}
+                disabled={!isStepComplete(currentStep)}
+              >
                 Next →
               </button>
             ) : (
               <button
                 className="btn-submit"
                 onClick={handleSubmit}
-                disabled={!formData.primaryGoal}
+                disabled={!isStepComplete(currentStep)}
               >
                 Let's Go!
               </button>

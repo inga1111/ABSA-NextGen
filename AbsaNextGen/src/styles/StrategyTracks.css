@@ -1,7 +1,4 @@
-/* ============================================
-   STRATEGY TRACKS STYLES — UI POLISH
-   File location: src/styles/StrategyTracks.css
-   ============================================ */
+
 
 .tracks-wrapper {
   max-width: 1100px;
@@ -49,7 +46,7 @@
   overflow: hidden;
 }
 
-/* Bottom glow per card using track colour */
+
 .track-selector-card::after {
   content: '';
   position: absolute;
@@ -363,9 +360,9 @@
 }
 
 .milestone-status-pill.not-started { background: #6b7280; }
-.milestone-status-pill.started { background: #3b82f6; }
-.milestone-status-pill.in-progress { background: #00c9b1; }
-.milestone-status-pill.completed { background: #8b5cf6; }
+.milestone-status-pill.started { background: #85009f; }
+.milestone-status-pill.in-progress { background: #095bff; }
+.milestone-status-pill.completed { background: #00b01a; }
 
 .milestone-actions {
   display: flex;

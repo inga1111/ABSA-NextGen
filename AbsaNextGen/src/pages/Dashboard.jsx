@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useLayoutEffect, useRef, useMemo } from 'react';
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 import { useUser } from '../context/UserContext';
 import { useNavigate } from 'react-router-dom';
@@ -73,7 +73,7 @@ function Dashboard() {
 
   const leftover = netMonthly - totalSpending - monthlySavings - monthlyInvestments - totalDebt;
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const targets = {
       netMonthly,
       grossMonthly,
@@ -142,7 +142,7 @@ function Dashboard() {
     };
   }, [netMonthly, grossMonthly, monthlyTax, uifMonthly, leftover, totalFixedExpenses, totalFlexibleExpenses, monthlySavings, monthlyInvestments, spendingPercent, savingsRate, expenseRatio, healthScore]);
 
-  const pieData = [
+  const pieData = useMemo(() => [
     { name: 'Rent / Bond', value: Number(rent) || 0 },
     { name: 'Car Payment', value: Number(carPayment) || 0 },
     { name: 'Savings', value: Number(monthlySavings) || 0 },
@@ -150,7 +150,7 @@ function Dashboard() {
     { name: 'Debt', value: Number(totalDebt) || 0 },
     { name: 'Investments', value: Number(monthlyInvestments) || 0 },
     { name: 'Other', value: Number(otherFixed) || 0 },
-  ].filter(item => item.value > 0);
+  ].filter(item => item.value > 0), [rent, carPayment, monthlySavings, groceries, dining, subscriptions, travel, otherFlexible, totalDebt, monthlyInvestments, otherFixed]);
 
   // -----------------------------------------------
   // Health status colour mapping
@@ -293,40 +293,41 @@ function Dashboard() {
             <span className="text-orange">{animatedValues.spendingPercent}% of your income</span>
           </div>
 
-          {pieData.length > 0 ? (
-            <ResponsiveContainer width="100%" height={280}>
-              <PieChart>
-                <Pie
-                  data={pieData}
-                  cx="50%"
-                  cy="50%"
-                  innerRadius={70}
-                  outerRadius={110}
-                  paddingAngle={3}
-                  dataKey="value"
-                >
-                  {pieData.map((entry, index) => (
-                    <Cell
-                      key={`cell-${index}`}
-                      fill={PIE_COLORS[index % PIE_COLORS.length]}
-                    />
-                  ))}
-                </Pie>
-                <Tooltip content={<CustomTooltip />} />
-                <Legend
-                  iconType="circle"
-                  iconSize={8}
-                  formatter={(value) => (
-                    <span style={{ color: '#A0A0C0', fontSize: '0.78rem' }}>{value}</span>
-                  )}
-                />
-              </PieChart>
-            </ResponsiveContainer>
-          ) : (
-            <div className="chart-empty">
-              No expense data to display yet
-            </div>
-          )}
+          <div style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', maxWidth: '520px', margin: '0 auto' }}>
+            <PieChart width={Math.min(window.innerWidth - 60, 520)} height={280} key={`chart-${pieData.reduce((acc, item) => acc + item.value, 0)}`}>
+              <Pie
+                data={pieData.length > 0 ? pieData : [{ name: 'Empty', value: 1 }]}
+                cx="50%"
+                cy="50%"
+                innerRadius={70}
+                outerRadius={110}
+                paddingAngle={3}
+                dataKey="value"
+                animationBegin={0}
+                animationDuration={600}
+                isAnimationActive={true}
+              >
+                {(pieData.length > 0 ? pieData : [{ name: 'Empty', value: 1 }]).map((entry, index) => (
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={pieData.length > 0 ? PIE_COLORS[index % PIE_COLORS.length] : 'rgba(160, 160, 192, 0.2)'}
+                  />
+                ))}
+              </Pie>
+              {pieData.length > 0 && (
+                <>
+                  <Tooltip content={<CustomTooltip />} />
+                  <Legend
+                    iconType="circle"
+                    iconSize={8}
+                    formatter={(value) => (
+                      <span style={{ color: '#A0A0C0', fontSize: '0.78rem' }}>{value}</span>
+                    )}
+                  />
+                </>
+              )}
+            </PieChart>
+          </div>
         </div>
 
         {/* Insight Cards (right side) */}

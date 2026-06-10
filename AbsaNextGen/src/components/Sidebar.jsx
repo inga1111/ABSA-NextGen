@@ -1,4 +1,4 @@
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { useUser } from '../context/UserContext';
 import SymbolIcon from '../components/SymbolIcon';
 import '../styles/Sidebar.css';
@@ -37,7 +37,8 @@ const NAV_ITEMS = [
 ];
 
 function Sidebar({ isOpen = true }) {
-  const { userData } = useUser();
+  const navigate = useNavigate();
+  const { userData, logout } = useUser();
   const location = useLocation();
   const isSimLabActive = location.pathname.startsWith('/simulation-lab');
 
@@ -112,6 +113,16 @@ function Sidebar({ isOpen = true }) {
             <span className="sidebar-chatbot-sub">Financial assistant</span>
           </div>
         </NavLink>
+        <button
+          type="button"
+          className="sidebar-logout-btn"
+          onClick={() => {
+            logout();
+            navigate('/');
+          }}
+        >
+          Log Out
+        </button>
       </div>
 
     </div>

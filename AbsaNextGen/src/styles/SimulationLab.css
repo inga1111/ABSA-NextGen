@@ -27,19 +27,6 @@
   overflow: hidden;
 }
 
-/* Subtle glow inside banner */
-.simlab-banner::after {
-  content: '';
-  position: absolute;
-  bottom: -20px;
-  right: 10%;
-  width: 200px;
-  height: 100px;
-  background: radial-gradient(ellipse, rgba(0, 201, 177, 0.2) 0%, transparent 70%);
-  filter: blur(20px);
-  pointer-events: none;
-}
-
 .simlab-banner-title {
   font-size: 1.1rem;
   font-weight: 700;
@@ -110,21 +97,6 @@
   transition: opacity var(--transition-normal);
 }
 
-/* Bottom glow */
-.studio-card::after {
-  content: '';
-  position: absolute;
-  bottom: -10px;
-  left: 15%;
-  right: 15%;
-  height: 70px;
-  background: radial-gradient(ellipse, var(--studio-colour) 0%, transparent 70%);
-  opacity: 0.15;
-  filter: blur(14px);
-  pointer-events: none;
-  transition: opacity var(--transition-normal);
-}
-
 .studio-card:hover {
   border-color: var(--studio-colour);
   transform: translateY(-5px);
@@ -132,7 +104,6 @@
 }
 
 .studio-card:hover::before { opacity: 1; }
-.studio-card:hover::after { opacity: 0.35; }
 
 .studio-card-top {
   display: flex;

@@ -241,6 +241,27 @@
   border-color: rgba(0, 201, 177, 0.4);
 }
 
+.sidebar-logout-btn {
+  display: block;
+  width: calc(100% - 2rem);
+  margin: 0.75rem 1rem 1rem;
+  padding: 0.9rem 1rem;
+  border: 1px solid rgba(232, 73, 15, 0.18);
+  border-radius: var(--radius-md);
+  background: rgba(232, 73, 15, 0.08);
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+}
+
+.sidebar-logout-btn:hover {
+  background: rgba(232, 73, 15, 0.14);
+  border-color: rgba(232, 73, 15, 0.35);
+}
+
 .sidebar-chatbot-icon {
   font-size: 1.4rem;
   flex-shrink: 0;
