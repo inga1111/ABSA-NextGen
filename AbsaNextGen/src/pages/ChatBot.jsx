@@ -43,7 +43,7 @@ function generateResponse(message, userData, formatCurrency) {
   // ── SAVINGS ──
   if (msg.includes('saving enough') || msg.includes('savings enough')) {
     if (savingsRate >= 20) {
-      return `Great news${name}! 🎉 You're saving ${savingsRate}% of your income — that's above the recommended 20%. You're on a solid path. Keep it up and consider maxing out your TFSA if you haven't already.`;
+      return `Great news${name}!  You're saving ${savingsRate}% of your income — that's above the recommended 20%. You're on a solid path. Keep it up and consider maxing out your TFSA if you haven't already.`;
     } else if (savingsRate >= 10) {
       return `You're saving ${savingsRate}% of your income${name}, which is a decent start — but the recommended target is at least 20%. You're currently putting away ${formatCurrency(totalSavings)} a month. Try increasing by even R500/month to build momentum.`;
     } else {
@@ -116,12 +116,12 @@ return `Your current savings rate is ${savingsRate}%${name}. This means you're s
 
   // ── HELLO / HI ──
   if (msg.includes('hello') || msg.includes('hi') || msg.includes('hey') || msg.includes('hola')) {
-    return `Hey${name}! 👋 I'm your ABSA NextGen financial assistant. I'm here to help you understand your finances, answer money questions, and guide you on your wealth journey.\n\nTry asking me something like "Am I saving enough?" or "What is a TFSA?"`;
+    return `Hey${name}! I'm your ABSA NextGen financial assistant. I'm here to help you understand your finances, answer money questions, and guide you on your wealth journey.\n\nTry asking me something like "Am I saving enough?" or "What is a TFSA?"`;
   }
 
   // ── THANK YOU ──
   if (msg.includes('thank') || msg.includes('thanks') || msg.includes('dankie')) {
-    return `You're welcome${name}! 💚 Remember, every smart financial decision you make today is building a better tomorrow. Is there anything else you'd like to know?`;
+    return `You're welcome${name}!  Remember, every smart financial decision you make today is building a better tomorrow. Is there anything else you'd like to know?`;
   }
 
   // ── DEFAULT ──
@@ -136,7 +136,7 @@ export default function ChatBot() {
   const [messages, setMessages] = useState([
     {
       role: 'bot',
-      text: `Hey ${userData.firstName || 'there'}! 👋 I'm your ABSA NextGen financial assistant. Ask me anything about your finances, savings, tax, or investments — I'm here to help!\n\nTry one of the suggested questions below to get started.`,
+      text: `Hey ${userData.firstName || 'there'}! I'm your ABSA NextGen financial assistant. Ask me anything about your finances, savings, tax, or investments. I'm here to help!\n\nTry one of the suggested questions below to get started.`,
     },
   ]);
   const [input, setInput] = useState('');

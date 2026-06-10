@@ -2,20 +2,21 @@ import { useState, useMemo } from 'react';
 import { useUser } from '../context/UserContext';
 import { useNavigate } from 'react-router-dom';
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts';
+import SymbolIcon from '../components/SymbolIcon';
 import '../styles/Studios.css';
 
 const INVESTMENT_STYLES = [
-  { id: 'safe', label: 'Safe', rate: 0.07, emoji: '🛡️', desc: 'Money market and fixed deposits (~7% return)' },
-  { id: 'balanced', label: 'Balanced Growth', rate: 0.10, emoji: '⚖️', desc: 'Unit trusts and TFSA mix (~10% return)' },
-  { id: 'aggressive', label: 'Aggressive Growth', rate: 0.14, emoji: '🚀', desc: 'ETFs and offshore exposure (~14% return)' },
+  { id: 'safe', label: 'Safe', rate: 0.07, icon: 'wallet', desc: 'Money market and fixed deposits (~7% return)' },
+  { id: 'balanced', label: 'Balanced Growth', rate: 0.10, icon: 'growth', desc: 'Unit trusts and TFSA mix (~10% return)' },
+  { id: 'aggressive', label: 'Aggressive Growth', rate: 0.14, icon: 'chart', desc: 'ETFs and offshore exposure (~14% return)' },
 ];
 
 function getMilestone(netWorth, netMonthly) {
   const depositTarget = netMonthly * 12 * 2.5;
-  if (netWorth >= depositTarget * 2) return { label: 'Financially Free', emoji: '🏆', colour: '#2ECC71' };
-  if (netWorth >= depositTarget) return { label: 'Can Afford Property Deposit', emoji: '🏠', colour: '#00C9B1' };
-  if (netWorth >= depositTarget * 0.5) return { label: 'Getting There', emoji: '📈', colour: '#F4D03F' };
-  return { label: 'Still Building', emoji: '🔨', colour: '#E8490F' };
+  if (netWorth >= depositTarget * 2) return { label: 'Financially Free', icon: 'check', colour: '#2ECC71' };
+  if (netWorth >= depositTarget) return { label: 'Can Afford Property Deposit', icon: 'home', colour: '#00C9B1' };
+  if (netWorth >= depositTarget * 0.5) return { label: 'Getting There', icon: 'growth', colour: '#F4D03F' };
+  return { label: 'Still Building', icon: 'warning', colour: '#E8490F' };
 }
 
 function FutureWealthStudio() {
@@ -78,7 +79,7 @@ function FutureWealthStudio() {
       </button>
 
       <div className="studio-header">
-        <div className="studio-header-icon">🔮</div>
+        <SymbolIcon name="growth" className="studio-header-icon" size={36} />
         <div>
           <h1>Future Wealth <span className="text-orange">Studio</span></h1>
           <p>See your life five years from now based on your current savings and investment habits.</p>
@@ -130,7 +131,7 @@ function FutureWealthStudio() {
                   className={`invest-style-option ${investmentStyle === s.id ? 'active' : ''}`}
                   onClick={() => setInvestmentStyle(s.id)}
                 >
-                  <div className="invest-style-emoji">{s.emoji}</div>
+                  <SymbolIcon name={s.icon} className="invest-style-emoji" size={20} />
                   <div className="invest-style-label">{s.label}</div>
                   <div className="invest-style-rate">{(s.rate * 100).toFixed(0)}% p.a.</div>
                   <div className="invest-style-desc">{s.desc}</div>
@@ -151,14 +152,14 @@ function FutureWealthStudio() {
         <div className="studio-results">
           {!hasSimulated ? (
             <div className="studio-results-placeholder">
-              <div className="studio-placeholder-icon">🔮</div>
+              <SymbolIcon name="chart" className="studio-placeholder-icon" size={36} />
               <div className="studio-placeholder-text">Set your savings and investment style, then hit Show My Future</div>
             </div>
           ) : (
             <>
               {/* Milestone card */}
               <div className="studio-identity-card" style={{ borderColor: milestone.colour }}>
-                <div className="studio-identity-emoji">{milestone.emoji}</div>
+                <SymbolIcon name={milestone.icon} className="studio-identity-emoji" size={36} />
                 <div className="studio-identity-label" style={{ color: milestone.colour }}>
                   {milestone.label}
                 </div>

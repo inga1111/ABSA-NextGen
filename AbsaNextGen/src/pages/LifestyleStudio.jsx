@@ -2,14 +2,15 @@
 import { useState, useMemo } from 'react';
 import { useUser } from '../context/UserContext';
 import { useNavigate } from 'react-router-dom';
+import SymbolIcon from '../components/SymbolIcon';
 import '../styles/Studios.css';
 
 // Identity labels based on car % of income
 function getIdentity(carPercent, investPercent) {
-  if (carPercent > 40) return { label: 'The Big Spender', emoji: '💸', colour: '#E74C3C', desc: 'You are prioritising lifestyle now over long-term wealth.' };
-  if (carPercent > 25) return { label: 'The Lifestyle Lover', emoji: '🌟', colour: '#F4D03F', desc: 'You enjoy the finer things but your future self may feel the pinch.' };
-  if (investPercent > 20) return { label: 'The Future Millionaire', emoji: '🚀', colour: '#2ECC71', desc: 'You are making smart choices that will compound over time.' };
-  return { label: 'The Balanced Builder', emoji: '⚖️', colour: '#00C9B1', desc: 'You are finding a healthy middle ground between lifestyle and wealth.' };
+  if (carPercent > 40) return { label: 'The Big Spender', icon: 'warning', colour: '#E74C3C', desc: 'You are prioritising lifestyle now over long-term wealth.' };
+  if (carPercent > 25) return { label: 'The Lifestyle Lover', icon: 'wallet', colour: '#F4D03F', desc: 'You enjoy the finer things but your future self may feel the pinch.' };
+  if (investPercent > 20) return { label: 'The Future Millionaire', icon: 'growth', colour: '#2ECC71', desc: 'You are making smart choices that will compound over time.' };
+  return { label: 'The Balanced Builder', icon: 'chart', colour: '#00C9B1', desc: 'You are finding a healthy middle ground between lifestyle and wealth.' };
 }
 
 function LifestyleStudio() {
@@ -57,7 +58,7 @@ function LifestyleStudio() {
 
       {/* Header */}
       <div className="studio-header">
-        <div className="studio-header-icon">🚗</div>
+        <SymbolIcon name="shopping" className="studio-header-icon" size={36} />
         <div>
           <h1>Lifestyle <span className="text-orange">Studio</span></h1>
           <p>Compare the real cost of a car purchase vs investing that money. See how your choices shape your future.</p>
@@ -142,14 +143,14 @@ function LifestyleStudio() {
 
           {!hasSimulated ? (
             <div className="studio-results-placeholder">
-              <div className="studio-placeholder-icon">🎯</div>
+              <SymbolIcon name="chart" className="studio-placeholder-icon" size={36} />
               <div className="studio-placeholder-text">Adjust the sliders and hit Simulate to see your results</div>
             </div>
           ) : (
             <>
               {/* Identity card */}
               <div className="studio-identity-card" style={{ borderColor: identity.colour }}>
-                <div className="studio-identity-emoji">{identity.emoji}</div>
+                <SymbolIcon name={identity.icon} className="studio-identity-emoji" size={36} />
                 <div className="studio-identity-label" style={{ color: identity.colour }}>{identity.label}</div>
                 <div className="studio-identity-desc">{identity.desc}</div>
               </div>
@@ -157,7 +158,7 @@ function LifestyleStudio() {
               {/* Comparison cards */}
               <div className="studio-comparison">
                 <div className="studio-compare-card red">
-                  <div className="studio-compare-icon">🚗</div>
+                  <SymbolIcon name="shopping" className="studio-compare-icon" size={24} />
                   <div className="studio-compare-title">If You Buy The Car</div>
                   <div className="studio-compare-value">{formatCurrency(monthlyCarRepayment)}<span>/month</span></div>
                   <div className="studio-compare-sub">Total cost over 5 years: {formatCurrency(monthlyCarRepayment * 60)}</div>
@@ -167,7 +168,7 @@ function LifestyleStudio() {
                 </div>
 
                 <div className="studio-compare-card green">
-                  <div className="studio-compare-icon">📈</div>
+                  <SymbolIcon name="growth" className="studio-compare-icon" size={24} />
                   <div className="studio-compare-title">If You Invest Instead</div>
                   <div className="studio-compare-value">{formatCurrency(investAmount)}<span>/month</span></div>
                   <div className="studio-compare-sub">Over 5 years at 10% return:</div>
